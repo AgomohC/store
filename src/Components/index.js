@@ -8,6 +8,7 @@ import Hero from "./Hero/Hero";
 import Input from "./Input/Input";
 import ItemList from "./ItemList/ItemList";
 import OrderSummary from "./OrderSummary/OrderSummary";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import SingleProduct from "./SingleProduct/SingleProduct";
 
 export {
@@ -21,5 +22,6 @@ export {
    Input,
    ItemList,
    OrderSummary,
+   PrivateRoute,
    SingleProduct,
 };
