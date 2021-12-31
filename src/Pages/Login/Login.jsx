@@ -10,10 +10,12 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { loginUser } from "../../Redux/userSlice";
 const useStyles = makeStyles((theme) => ({
    container: {
       minHeight: "100vh",
-      letterSpacing: 2,
    },
    formContainer: {
       minHeight: 320,
@@ -59,9 +61,14 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.grey[600],
       letterSpacing: 2.5,
    },
+   letterSpace: {
+      letterSpacing: 2,
+   },
 }));
 const Login = () => {
    const classes = useStyles();
+   const { user, pending } = useSelector((state) => state.user);
+   const dispatch = useDispatch();
 
    const handleSubmit = (event) => {
       event.preventDefault();
@@ -70,81 +77,107 @@ const Login = () => {
       const password = data.get("password");
       // TODO: complete handlesubmit by making a post request with the form data as the payload and dispatch the function to the userslice. Also write tests
       //   TODO add error handlers
+      dispatch(loginUser({ username, password }));
    };
 
    return (
-      <div className={classNames(classes.container, classes.flex)}>
+      <>
+         {user && <Navigate to="/account" />};
          <Grid
-            className={classes.formContainer}
+            className={classNames(
+               classes.container,
+               classes.flex,
+               classes.letterSpace
+            )}
             container
-            direction="column"
-            xs={12}
-            sm={8}
-            md={6}
-            lg={4}
          >
-            <span
+            <Grid
+               className={classes.formContainer}
+               container
                item
-               className={classNames(
-                  classes.iconContainer,
-                  classes.flex,
-                  classes.centerMargin
-               )}
+               direction="column"
+               xs={12}
+               sm={8}
+               md={6}
+               lg={4}
             >
-               <LockOutlinedIcon />
-            </span>
-
-            <Typography component="h1" variant="h4">
-               Sign in
-            </Typography>
-
-            <Box
-               component="form"
-               noValidate
-               className={classes.marginTopTwo}
-               onSubmit={handleSubmit}
-            >
-               <TextField
-                  required
-                  fullWidth
-                  className={classes.marginTopTwo}
-                  id="username"
-                  label="Username"
-                  name="username"
-                  autoFocus
-               />
-               <TextField
-                  required
-                  fullWidth
-                  className={classes.marginTopTwo}
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-               />
-
-               <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.marginTopThree}
+               <span
+                  item
+                  className={classNames(
+                     classes.iconContainer,
+                     classes.flex,
+                     classes.centerMargin
+                  )}
                >
-                  Sign In
-               </Button>
+                  <LockOutlinedIcon data-testid="icon" />
+               </span>
 
-               <Typography
-                  variant="subtitle2"
-                  className={classNames(classes.text, classes.marginTopTwo)}
-               >
-                  Don't have an account?
-                  <Link to="/register" className={classes.link}>
-                     Sign Up
-                  </Link>
+               <Typography component="h1" variant="h4">
+                  Sign in
                </Typography>
-            </Box>
+
+               <Box
+                  component="form"
+                  noValidate
+                  className={classes.marginTopTwo}
+                  onSubmit={handleSubmit}
+                  data-testid="form"
+               >
+                  <TextField
+                     required
+                     fullWidth
+                     className={classes.marginTopTwo}
+                     id="username"
+                     label="Username"
+                     name="username"
+                     autoFocus
+                     data-testid="username"
+                  />
+                  <TextField
+                     required
+                     fullWidth
+                     className={classes.marginTopTwo}
+                     name="password"
+                     label="Password"
+                     type="password"
+                     id="password"
+                     data-testid="password"
+                  />
+
+                  <Button
+                     type="submit"
+                     fullWidth
+                     variant="contained"
+                     color="primary"
+                     className={classes.marginTopThree}
+                     data-testid="submit-btn"
+                     disabled={pending}
+                  >
+                     <Typography
+                        variant="body1"
+                        className={classes.letterSpace}
+                     >
+                        Sign In
+                     </Typography>
+                  </Button>
+
+                  <Typography
+                     variant="subtitle2"
+                     className={classNames(classes.text, classes.marginTopTwo)}
+                  >
+                     Don't have an account?
+                     <Link
+                        to="/register"
+                        className={classes.link}
+                        data-testid="register-link"
+                     >
+                        Sign Up
+                     </Link>
+                  </Typography>
+               </Box>
+            </Grid>
          </Grid>
-      </div>
+      </>
    );
 };
 
