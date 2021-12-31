@@ -17,7 +17,6 @@ const App = () => {
       <>
          <Routes>
             <Route
-               exact
                path="/"
                element={
                   <>
@@ -28,7 +27,6 @@ const App = () => {
                }
             />
             <Route
-               exact
                path="/products"
                element={
                   <>
@@ -39,7 +37,6 @@ const App = () => {
                }
             />
             <Route
-               exact
                path="/account"
                element={
                   <PrivateRoute>
@@ -50,7 +47,6 @@ const App = () => {
                }
             />
             <Route
-               exact
                path="/cart"
                element={
                   <PrivateRoute>
@@ -61,7 +57,6 @@ const App = () => {
                }
             />
             <Route
-               exact
                path="/checkout"
                element={
                   <PrivateRoute>
@@ -72,7 +67,6 @@ const App = () => {
                }
             />
             <Route
-               exact
                path="/products/:id"
                element={
                   <>
@@ -82,8 +76,8 @@ const App = () => {
                   </>
                }
             />
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<SignUp />} />
          </Routes>
       </>
    );
