@@ -1,8 +1,15 @@
-import { render, screen } from "@testing-library/react";
-import App from "./App";
+import { render, screen, fireEvent } from "@testing-library/react";
+import Login from "../Login";
 
-test("renders learn react link", () => {
-   render(<App />);
-   const linkElement = screen.getByText(/learn react/i);
-   expect(linkElement).toBeInTheDocument();
+describe("Login test block", () => {
+   it("renders the username input field", () => {
+      render(<Login />);
+      const usernameElement = screen.getAllByLabelText(/username/i);
+      expect(usernameElement).toBeInTheDocument();
+   });
+   it("renders the password input field", () => {
+      render(<Login />);
+      const passwordElement = screen.getAllByLabelText(/password/i);
+      expect(passwordElement).toBeInTheDocument();
+   });
 });

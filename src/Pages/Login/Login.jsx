@@ -69,11 +69,7 @@ const Login = () => {
       const username = data.get("username");
       const password = data.get("password");
       // TODO: complete handlesubmit by making a post request with the form data as the payload and dispatch the function to the userslice. Also write tests
-      // eslint-disable-next-line no-console
-      console.log({
-         username,
-         password,
-      });
+      //   TODO add error handlers
    };
 
    return (
