@@ -4,7 +4,7 @@ import Login from "../Login";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "../../../Redux/store";
-// TODO: 1 CHECK IF FORM IS RENDERED CORRECTLY, 2 CHECK IF TITLE IS RENDERED CORRECTLY, 3 CHECK IF BUTTON CLICKS CORRECTLY 4 CHECK IF BOTTOM TYPOGRAPHY AND LINK ARE RENDERED CORRECTLY 5 CHECK IF LINK INTERACTS CORRECTLY
+// TODO: 3 CHECK IF BUTTON CLICKS CORRECTLY 5 CHECK IF LINK INTERACTS CORRECTLY 6 TEST ONCHANGE FOR INPUT FIELDS
 
 const MockLogin = () => {
    return (
@@ -44,7 +44,16 @@ describe("Login component renders properly", () => {
    });
    it("renders the register link", () => {
       render(<MockLogin />);
-      const buttonElement = screen.getByTestId("register-link");
-      expect(buttonElement).toBeInTheDocument();
+      const linkElement = screen.getByTestId("register-link");
+      expect(linkElement).toBeInTheDocument();
+   });
+});
+
+describe("Buttons and Links interact correctly", () => {
+   it("redirects to sign up page", () => {
+      render(<MockLogin />);
+      const linkElement = screen.getByTestId("register-link");
+      fireEvent.click(linkElement);
+      // expect(linkElement).toBeInTheDocument();
    });
 });

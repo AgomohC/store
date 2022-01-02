@@ -75,8 +75,6 @@ const Login = () => {
       const data = new FormData(event.currentTarget);
       const username = data.get("username");
       const password = data.get("password");
-      // TODO: complete handlesubmit by making a post request with the form data as the payload and dispatch the function to the userslice. Also write tests
-      //   TODO add error handlers
       dispatch(loginUser({ username, password }));
    };
 
@@ -93,7 +91,6 @@ const Login = () => {
          >
             <Grid
                className={classes.formContainer}
-               container
                item
                direction="column"
                xs={12}
@@ -102,7 +99,6 @@ const Login = () => {
                lg={4}
             >
                <span
-                  item
                   className={classNames(
                      classes.iconContainer,
                      classes.flex,
@@ -118,7 +114,6 @@ const Login = () => {
 
                <Box
                   component="form"
-                  noValidate
                   className={classes.marginTopTwo}
                   onSubmit={handleSubmit}
                   data-testid="form"
@@ -126,6 +121,7 @@ const Login = () => {
                   <TextField
                      required
                      fullWidth
+                     type="text"
                      className={classes.marginTopTwo}
                      id="username"
                      label="Username"
