@@ -30,7 +30,14 @@ export const userSlice = createSlice({
       pending: false,
       error: false,
    },
-   reducers: {},
+   reducers: {
+      logOut: (state) => {
+         state.user = null;
+         state.pending = false;
+         state.error = false;
+         localStorage.removeItem("user");
+      },
+   },
    extraReducers: {
       [loginUser.pending]: (state) => {
          state.pending = true;
@@ -61,6 +68,6 @@ export const userSlice = createSlice({
    },
 });
 
-export const {} = userSlice.actions;
+export const { logOut } = userSlice.actions;
 
 export default userSlice.reducer;

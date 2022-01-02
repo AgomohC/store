@@ -80,15 +80,6 @@ const SignUp = () => {
       const password = data.get("password");
       const confirmPassword = data.get("confirmPassword");
 
-      console.log(
-         lastName,
-         firstName,
-         email,
-         username,
-         password,
-         confirmPassword
-      );
-
       dispatch(
          registerUser({
             lastName,
@@ -231,7 +222,7 @@ const SignUp = () => {
                      <Link
                         to="/login"
                         className={classes.link}
-                        data-testid="register-link"
+                        data-testid="login-link"
                      >
                         Log in
                      </Link>
