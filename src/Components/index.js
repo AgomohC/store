@@ -10,6 +10,7 @@ import ItemList from "./ItemList/ItemList";
 import OrderSummary from "./OrderSummary/OrderSummary";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import SingleProduct from "./SingleProduct/SingleProduct";
+import CustomSnackbar from "./Snackbar/Snackbar";
 
 export {
    AccountInfo,
@@ -24,4 +25,5 @@ export {
    OrderSummary,
    PrivateRoute,
    SingleProduct,
+   CustomSnackbar,
 };

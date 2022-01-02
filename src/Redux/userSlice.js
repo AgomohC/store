@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { openSnackBar } from "./appSlice";
+import { useDispatch } from "react-redux";
 
 export const loginUser = createAsyncThunk("login/user", async (user) => {
    const { data } = await axios.post(
@@ -44,11 +46,25 @@ export const userSlice = createSlice({
          state.error = false;
       },
       [loginUser.fulfilled]: (state, action) => {
+         const dispatch = useDispatch();
+         dispatch(
+            openSnackBar({
+               text: "Logged in successfully",
+               severity: "success",
+            })
+         );
          state.pending = false;
          state.error = false;
          state.user = action.payload;
       },
       [loginUser.rejected]: (state) => {
+         const dispatch = useDispatch();
+         dispatch(
+            openSnackBar({
+               text: "Something went wrong, please try again",
+               severity: "error",
+            })
+         );
          state.pending = false;
          state.error = true;
       },
@@ -57,11 +73,25 @@ export const userSlice = createSlice({
          state.error = false;
       },
       [registerUser.fulfilled]: (state, action) => {
+         const dispatch = useDispatch();
+         dispatch(
+            openSnackBar({
+               text: "Account created successfully, welcome!",
+               severity: "success",
+            })
+         );
          state.pending = false;
          state.error = false;
          state.user = action.payload;
       },
       [registerUser.rejected]: (state) => {
+         const dispatch = useDispatch();
+         dispatch(
+            openSnackBar({
+               text: "Something went wrong, please try again",
+               severity: "error",
+            })
+         );
          state.pending = false;
          state.error = true;
       },

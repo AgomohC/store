@@ -1,5 +1,5 @@
 import React from "react";
-import { Footer, Header } from "./Components";
+import { Footer, Header, PrivateRoute, CustomSnackbar } from "./Components";
 import {
    Account,
    Cart,
@@ -10,11 +10,12 @@ import {
    SignUp,
    SingleProductPage,
 } from "./Pages";
-import { PrivateRoute } from "./Components";
+
 import { Route, Routes } from "react-router-dom";
 const App = () => {
    return (
       <>
+         <CustomSnackbar />
          <Routes>
             <Route
                path="/"
