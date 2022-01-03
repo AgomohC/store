@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { closeMenu } from "../../Redux/appSlice";
 import { useDispatch } from "react-redux";
-import classNames from "classnames";
+
 import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -33,10 +33,6 @@ const useStyles = makeStyles((theme) => ({
    },
    linkText: {
       marginTop: theme.spacing(2),
-      transition: "0.3s all ease-in-out",
-      "&:hover": {
-         marginLeft: theme.spacing(1),
-      },
    },
    close: {
       position: "absolute",
@@ -46,10 +42,12 @@ const useStyles = makeStyles((theme) => ({
    whiteText: {
       color: "#fff",
    },
-   boldText: {
-      fontWeight: "bold",
-   },
+
    link: {
+      transition: "0.3s all ease-in-out",
+      "&:hover": {
+         marginLeft: theme.spacing(1),
+      },
       color: "#fff",
       textDecoration: "none",
    },
@@ -59,14 +57,19 @@ const Menu = () => {
    const classes = useStyles();
    const dispatch = useDispatch();
    return (
-      <Grid component="aside" container xs={10} sm={8} className={classes.root}>
+      <Grid
+         component="aside"
+         item
+         container
+         xs={10}
+         sm={8}
+         className={classes.root}
+      >
          <IconButton
             onClick={() => dispatch(closeMenu())}
             className={classes.close}
          >
-            <CloseIcon
-               className={classNames(classes.whiteText, classes.boldText)}
-            />
+            <CloseIcon className={classes.whiteText} />
          </IconButton>
          <Grid item container direction="column" className={classes.navLinks}>
             <Typography
