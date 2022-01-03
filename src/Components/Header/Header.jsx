@@ -17,23 +17,30 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { openMenu } from "../../Redux/appSlice";
 import classNames from "classnames";
+import { logOut } from "../../Redux/userSlice";
 
 const useStyles = makeStyles((theme) => ({
    root: {
-      paddingLeft: 96,
-      paddingRight: 96,
+      [theme.breakpoints.up("lg")]: {
+         paddingLeft: 96,
+         paddingRight: 96,
+      },
+      overflow: "hidden",
    },
    logo: {
       fontFamily: "Meow Script, cursive",
    },
    btnContainer: {
+      display: "flex",
       paddingTop: theme.spacing(1),
       paddingBottom: theme.spacing(1),
       color: "#fff",
    },
    menuButton: {
-      marginRight: theme.spacing(2),
+      marginRight: theme.spacing(0.5),
+
       [theme.breakpoints.up("md")]: {
+         marginRight: theme.spacing(2),
          display: "none",
       },
    },
@@ -61,13 +68,28 @@ const useStyles = makeStyles((theme) => ({
       marginRight: theme.spacing(3),
    },
    marginRightFour: {
-      marginRight: theme.spacing(4),
+      marginRight: theme.spacing(1),
+      [theme.breakpoints.up("sm")]: {
+         marginRight: theme.spacing(4),
+      },
    },
    letterSpace: {
       letterSpacing: 2,
    },
    whiteText: {
       color: "#fff",
+   },
+   hideMobile: {
+      display: "none",
+      [theme.breakpoints.up("md")]: {
+         display: "flex",
+      },
+   },
+   hideMini: {
+      display: "none",
+      [theme.breakpoints.up("sm")]: {
+         display: "flex",
+      },
    },
 }));
 
@@ -77,6 +99,9 @@ const Header = () => {
    const navigate = useNavigate();
    const { isMenuOpen } = useSelector((state) => state.app);
    const user = useSelector((state) => state.user.user);
+   const handleLogout = () => {
+      dispatch(logOut());
+   };
    return (
       <>
          <AppBar position="static" color="primary">
@@ -103,7 +128,13 @@ const Header = () => {
                   spacing={10}
                   className={classNames(classes.flex, classes.flexEnd)}
                >
-                  <Grid item className={classes.marginRightThree}>
+                  <Grid
+                     item
+                     className={classNames(
+                        classes.marginRightThree,
+                        classes.hideMobile
+                     )}
+                  >
                      <Button
                         variant="text"
                         onClick={() => {
@@ -137,7 +168,8 @@ const Header = () => {
                            variant="body1"
                            className={classNames(
                               classes.marginLeftOne,
-                              classes.letterSpace
+                              classes.letterSpace,
+                              classes.hideMobile
                            )}
                         >
                            CART
@@ -145,12 +177,15 @@ const Header = () => {
                      </Button>
 
                      {user ? (
-                        <>
+                        <div className={classes.btnContainer}>
                            <Button
                               onClick={() => {
                                  navigate("/account");
                               }}
-                              className={classes.whiteText}
+                              className={classNames(
+                                 classes.whiteText,
+                                 classes.hideMini
+                              )}
                            >
                               <AccountCircleIcon />
                               <Typography
@@ -163,13 +198,28 @@ const Header = () => {
                                  {user.username.toUpperCase()}
                               </Typography>
                            </Button>
-                        </>
+                           <Button
+                              size="small"
+                              variant="contained"
+                              color="secondary"
+                              onClick={handleLogout}
+                           >
+                              <Typography
+                                 variant="body1"
+                                 className={classes.letterSpace}
+                              >
+                                 Log Out
+                              </Typography>
+                           </Button>
+                        </div>
                      ) : (
                         <div className={classes.btnContainer}>
                            <Button
                               variant="text"
                               onClick={() => navigate("/login")}
                               size="small"
+                              disableRipple
+                              disableFocusRipple
                            >
                               <Typography
                                  variant="body1"
@@ -186,6 +236,7 @@ const Header = () => {
                               size="small"
                               variant="contained"
                               onClick={() => navigate("/register")}
+                              className={classes.hideMini}
                            >
                               <Typography
                                  variant="body1"
