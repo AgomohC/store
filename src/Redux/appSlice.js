@@ -2,9 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const appSlice = createSlice({
    name: "app",
    initialState: {
-      snackBarOpen: true,
-      snackBarSeverity: "success",
-      snackBarText: "successful",
+      snackBarOpen: false,
+      snackBarSeverity: "",
+      snackBarText: "",
+      isMenuOpen: false,
    },
    reducers: {
       closeSnackBar: (state) => {
@@ -18,10 +19,17 @@ export const appSlice = createSlice({
          state.snackBarSeverity = severity;
          state.snackBarText = text;
       },
+      openMenu: (state) => {
+         state.isMenuOpen = true;
+      },
+      closeMenu: (state) => {
+         state.isMenuOpen = false;
+      },
    },
    extraReducers: {},
 });
 
-export const { closeSnackBar, openSnackBar } = appSlice.actions;
+export const { closeSnackBar, openSnackBar, openMenu, closeMenu } =
+   appSlice.actions;
 
 export default appSlice.reducer;

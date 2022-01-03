@@ -9,24 +9,24 @@ const theme = createTheme({
          "Arial",
          "sans-serif",
       ].join(","),
-      h1: {
-         fontFamily: ["Bellefair", "serif"].join(","),
-      },
-      h2: {
-         fontFamily: ["Bellefair", "serif"].join(","),
-      },
-      h3: {
-         fontFamily: ["Bellefair", "serif"].join(","),
-      },
-      h4: {
-         fontFamily: ["Bellefair", "serif"].join(","),
-      },
-      h5: {
-         fontFamily: ["Bellefair", "serif"].join(","),
-      },
-      h6: {
-         fontFamily: ["Bellefair", "serif"].join(","),
-      },
+      // h1: {
+      //    fontFamily: ["Roboto", "sans-serif"].join(","),
+      // },
+      // h2: {
+      //    fontFamily: ["Roboto", "sans-serif"].join(","),
+      // },
+      // h3: {
+      //    fontFamily: ["Roboto", "sans-serif"].join(","),
+      // },
+      // h4: {
+      //    fontFamily: ["Roboto", "sans-serif"].join(","),
+      // },
+      // h5: {
+      //    fontFamily: ["Roboto", "sans-serif"].join(","),
+      // },
+      // h6: {
+      //    fontFamily: ["Roboto", "sans-serif"].join(","),
+      // },
    },
    breakpoints: {
       values: {

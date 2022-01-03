@@ -28,7 +28,8 @@ export const registerUser = createAsyncThunk("register/user", async (user) => {
 export const userSlice = createSlice({
    name: "user",
    initialState: {
-      user: null,
+      user: { username: "john" },
+      // user: null,
       pending: false,
       error: false,
    },
@@ -46,6 +47,9 @@ export const userSlice = createSlice({
          state.error = false;
       },
       [loginUser.fulfilled]: (state, action) => {
+         state.pending = false;
+         state.error = false;
+         state.user = action.payload;
          const dispatch = useDispatch();
          dispatch(
             openSnackBar({
@@ -53,11 +57,10 @@ export const userSlice = createSlice({
                severity: "success",
             })
          );
-         state.pending = false;
-         state.error = false;
-         state.user = action.payload;
       },
       [loginUser.rejected]: (state) => {
+         state.pending = false;
+         state.error = true;
          const dispatch = useDispatch();
          dispatch(
             openSnackBar({
@@ -65,14 +68,15 @@ export const userSlice = createSlice({
                severity: "error",
             })
          );
-         state.pending = false;
-         state.error = true;
       },
       [registerUser.pending]: (state) => {
          state.pending = true;
          state.error = false;
       },
       [registerUser.fulfilled]: (state, action) => {
+         state.pending = false;
+         state.error = false;
+         state.user = action.payload;
          const dispatch = useDispatch();
          dispatch(
             openSnackBar({
@@ -80,11 +84,10 @@ export const userSlice = createSlice({
                severity: "success",
             })
          );
-         state.pending = false;
-         state.error = false;
-         state.user = action.payload;
       },
       [registerUser.rejected]: (state) => {
+         state.pending = false;
+         state.error = true;
          const dispatch = useDispatch();
          dispatch(
             openSnackBar({
@@ -92,8 +95,6 @@ export const userSlice = createSlice({
                severity: "error",
             })
          );
-         state.pending = false;
-         state.error = true;
       },
    },
 });
