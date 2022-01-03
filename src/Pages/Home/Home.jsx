@@ -4,13 +4,12 @@ const Home = () => {
    return (
       <>
          <Hero />
-         Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
-         voluptatum natus vitae nobis cumque quisquam temporibus ea ab minima
-         expedita! Beatae dolorum totam nihil reiciendis! Dignissimos laudantium
-         accusamus dolor neque sapiente, distinctio at nostrum minima magnam
-         obcaecati aliquid assumenda libero iure vero delectus nisi laborum!
-         Corporis voluptatibus enim vero. Autem ullam dicta praesentium ea
-         placeat ex vitae aut debitis!
+         Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus sed,
+         tempore, beatae quos velit alias ducimus reprehenderit culpa
+         consequatur fugit voluptatum voluptate recusandae? Porro fugiat
+         consequuntur quaerat officiis at eum, nobis molestiae fuga unde a animi
+         laboriosam numquam accusantium et incidunt beatae tempora ratione,
+         quas, veritatis dolores sint cum. Saepe.
       </>
    );
 };

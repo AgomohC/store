@@ -28,8 +28,8 @@ export const registerUser = createAsyncThunk("register/user", async (user) => {
 export const userSlice = createSlice({
    name: "user",
    initialState: {
-      // user: { username: "john" },
-      user: null,
+      user: { username: "john" },
+      // user: null,
       pending: false,
       error: false,
    },

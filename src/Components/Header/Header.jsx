@@ -13,6 +13,7 @@ import {
    IconButton,
    Badge,
    Button,
+   Fade,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { openMenu } from "../../Redux/appSlice";
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
          paddingRight: 96,
       },
       overflow: "hidden",
+      position: "relative",
    },
    logo: {
       fontFamily: "Meow Script, cursive",
@@ -251,7 +253,11 @@ const Header = () => {
                </Grid>
             </Toolbar>
          </AppBar>
-         {isMenuOpen && <Menu />}
+         {isMenuOpen && (
+            <Fade in={isMenuOpen}>
+               <Menu />
+            </Fade>
+         )}
       </>
    );
 };
