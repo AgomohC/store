@@ -6,6 +6,8 @@ export const appSlice = createSlice({
       snackBarSeverity: "",
       snackBarText: "",
       isMenuOpen: false,
+      searchValue: "",
+      categories: ["All"],
    },
    reducers: {
       closeSnackBar: (state) => {
