@@ -1,5 +1,5 @@
 import AccountInfo from "./AccountInfo/AccountInfo";
-import Aside from "./Aside/Aside";
+
 import CartList from "./CartList/CartList";
 import CheckoutInfo from "./CheckoutInfo/CheckoutInfo";
 import Footer from "./Footer/Footer";
@@ -14,7 +14,6 @@ import CustomSnackbar from "./Snackbar/Snackbar";
 
 export {
    AccountInfo,
-   Aside,
    CartList,
    CheckoutInfo,
    Footer,

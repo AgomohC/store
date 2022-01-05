@@ -1,10 +1,9 @@
 import React from "react";
-import { Aside, Input, ItemList } from "../../Components";
+import { Input, ItemList } from "../../Components";
 const Products = () => {
    return (
       <>
-         <Aside></Aside>
-         <Input></Input>
+         <Input />
          <ItemList></ItemList>
       </>
    );

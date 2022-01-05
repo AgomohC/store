@@ -1,6 +1,9 @@
 import React from "react";
 import { makeStyles, alpha, InputBase, Grid } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import { useSelector, useDispatch } from "react-redux";
+import { searchBarFunction } from "../../Redux/appSlice";
+import { setSearchBarValue } from "../../Redux/appSlice";
 
 const useStyles = makeStyles((theme) => ({
    container: {
@@ -50,6 +53,13 @@ const useStyles = makeStyles((theme) => ({
 
 const Input = () => {
    const classes = useStyles();
+   const dispatch = useDispatch();
+   const { searchValue } = useSelector((state) => state.app);
+
+   const handleChange = (event) => {
+      dispatch(setSearchBarValue(event.target.value));
+      dispatch(searchBarFunction(event.target.value));
+   };
    return (
       <Grid container className={classes.container}>
          <div className={classes.search}>
@@ -63,6 +73,8 @@ const Input = () => {
                   input: classes.inputInput,
                }}
                inputProps={{ "aria-label": "search" }}
+               value={searchValue}
+               onChange={handleChange}
             />
          </div>
       </Grid>
