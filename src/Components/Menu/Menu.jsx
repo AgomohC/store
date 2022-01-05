@@ -15,11 +15,14 @@ const useStyles = makeStyles((theme) => ({
    root: {
       position: "fixed",
       top: 56,
+      [`${theme.breakpoints.up("xs")} and (orientation: landscape)`]: {
+         top: 48,
+      },
       [theme.breakpoints.up("sm")]: {
          top: 64,
       },
       left: 0,
-      backgroundColor: alpha(theme.palette.primary.light, 0.9),
+      backgroundColor: theme.palette.primary.light,
       display: "flex",
       height: "100vh",
       [theme.breakpoints.up("md")]: {
@@ -28,8 +31,9 @@ const useStyles = makeStyles((theme) => ({
       zIndex: 999,
    },
    navLinks: {
-      marginTop: theme.spacing(10),
-      marginLeft: theme.spacing(5),
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: theme.spacing(4),
    },
    linkText: {
       marginTop: theme.spacing(2),
@@ -57,14 +61,7 @@ const Menu = () => {
    const classes = useStyles();
    const dispatch = useDispatch();
    return (
-      <Grid
-         component="aside"
-         item
-         container
-         xs={10}
-         sm={8}
-         className={classes.root}
-      >
+      <Grid component="aside" item container xs={12} className={classes.root}>
          <IconButton
             onClick={() => dispatch(closeMenu())}
             className={classes.close}

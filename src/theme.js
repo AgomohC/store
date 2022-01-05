@@ -1,6 +1,6 @@
 import { createTheme } from "@material-ui/core";
 
-const theme = createTheme({
+const theme = createTheme((theme) => ({
    typography: {
       fontFamily: [
          "Barlow Condensed",
@@ -37,6 +37,6 @@ const theme = createTheme({
          xl: 1440,
       },
    },
-});
+}));
 
 export default theme;

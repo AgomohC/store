@@ -78,6 +78,9 @@ const useStyles = makeStyles((theme) => ({
    letterSpace: {
       letterSpacing: 2,
    },
+   letterSpace2: {
+      letterSpacing: 1.2,
+   },
    whiteText: {
       color: "#fff",
    },
@@ -208,7 +211,7 @@ const Header = () => {
                            >
                               <Typography
                                  variant="body1"
-                                 className={classes.letterSpace}
+                                 className={classes.letterSpace2}
                               >
                                  Log Out
                               </Typography>
@@ -227,7 +230,7 @@ const Header = () => {
                                  variant="body1"
                                  className={classNames(
                                     classes.whiteText,
-                                    classes.letterSpace
+                                    classes.letterSpace2
                                  )}
                               >
                                  Log In
