@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
       [theme.breakpoints.up("sm")]: {
          height: "calc(100vh - 64px)",
       },
-      // backgroundImage: ,
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",
@@ -27,19 +26,38 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center",
       background: `${alpha(theme.palette.grey[900], 0.9)} url(${img})`,
       backgroundBlendMode: "overlay",
+      alignItems: "center",
    },
    whiteText: {
       color: "#fff",
    },
    scriptText: {
       fontFamily: "Meow Script, cursive",
+      marginBottom: theme.spacing(2),
+      maxWidth: 375,
+      fontSize: "2rem",
+      [theme.breakpoints.up("sm")]: {
+         fontSize: "3rem",
+      },
+   },
+   bigText: {
+      maxWidth: 600,
+      marginBottom: theme.spacing(3),
+      fontSize: "3rem",
+      [theme.breakpoints.up("sm")]: {
+         marginBottom: theme.spacing(6),
+         fontSize: "4.5rem",
+      },
+      [theme.breakpoints.up("md")]: {
+         fontSize: "6rem",
+      },
    },
 }));
 
 const WhiteButton = withStyles({
    root: {
       borderColor: "#fff",
-      backgroundColor: "transparent",
+
       color: "#fff",
       textTransform: "capitalize",
    },
@@ -52,14 +70,19 @@ const Hero = () => {
       <Grid container className={classes.container}>
          <Grid item xs={10}>
             <Typography
-               variant="h4"
+               variant="h3"
                component="h2"
                color="initial"
                className={classes.scriptText}
             >
-               The Best Products At The Best Prices
+               The Best Products
             </Typography>
-            <Typography variant="h2" component="h3" color="initial">
+            <Typography
+               variant="h1"
+               component="h3"
+               color="initial"
+               className={classes.bigText}
+            >
                Be Unique and Stylish
             </Typography>
             <WhiteButton
