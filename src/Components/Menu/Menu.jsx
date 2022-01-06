@@ -1,12 +1,6 @@
 import React from "react";
 import CloseIcon from "@material-ui/icons/Close";
-import {
-   makeStyles,
-   alpha,
-   Grid,
-   IconButton,
-   Typography,
-} from "@material-ui/core";
+import { makeStyles, Grid, IconButton, Typography } from "@material-ui/core";
 import { closeMenu } from "../../Redux/appSlice";
 import { useDispatch } from "react-redux";
 

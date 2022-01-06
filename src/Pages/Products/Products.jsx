@@ -1,10 +1,18 @@
-import React from "react";
-import { Input, ItemList } from "../../Components";
+import React, { useEffect, useCallback } from "react";
+import { Input, ItemList, Categories } from "../../Components";
+import { useDispatch } from "react-redux";
+import { getCategories } from "../../Redux/appSlice";
 const Products = () => {
+   const dispatch = useCallback(useDispatch());
+
+   useEffect(() => {
+      dispatch(getCategories());
+   }, [dispatch]);
    return (
       <>
          <Input />
-         <ItemList></ItemList>
+         <Categories />
+         <ItemList />
       </>
    );
 };

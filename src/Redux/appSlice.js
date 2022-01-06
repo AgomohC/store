@@ -8,6 +8,13 @@ export const searchBarFunction = createAsyncThunk(
       return { data, input };
    }
 );
+export const getCategories = createAsyncThunk("get categories", async () => {
+   const { data } = await axios.get(
+      "https://fakestoreapi.com/products/categories"
+   );
+   return data;
+});
+
 export const appSlice = createSlice({
    name: "app",
    initialState: {
@@ -16,7 +23,7 @@ export const appSlice = createSlice({
       snackBarText: "",
       isMenuOpen: false,
       searchValue: "",
-      categories: ["All"],
+      categories: [],
       pending: false,
       items: [],
       error: false,
@@ -45,7 +52,6 @@ export const appSlice = createSlice({
    },
    extraReducers: {
       [searchBarFunction.pending]: (state, action) => {
-         // state.searchValue = action.payload.input;
          state.pending = true;
          state.error = false;
       },
@@ -53,12 +59,23 @@ export const appSlice = createSlice({
          state.pending = false;
          state.error = false;
          state.items = action.payload.data;
-         // state.searchValue = action.payload.input;
       },
       [searchBarFunction.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
-         // state.searchValue = action.payload.input;
+      },
+      [getCategories.pending]: (state, action) => {
+         state.pending = true;
+         state.error = false;
+      },
+      [getCategories.fulfilled]: (state, action) => {
+         state.pending = false;
+         state.error = false;
+         state.categories = ["All", ...action.payload];
+      },
+      [getCategories.rejected]: (state, action) => {
+         state.pending = false;
+         state.error = true;
       },
    },
 });
