@@ -15,6 +15,21 @@ export const getCategories = createAsyncThunk("get categories", async () => {
    return data;
 });
 
+export const getProductsInCategories = createAsyncThunk(
+   "get products in each category",
+   async () => {
+      const { data } = await axios.get(
+         "https://fakestoreapi.com/products/category/jewelery"
+      );
+      return data;
+   }
+);
+
+export const getItems = createAsyncThunk("get items", async () => {
+   const { data } = await axios.get("https://fakestoreapi.com/products");
+   return data;
+});
+
 export const appSlice = createSlice({
    name: "app",
    initialState: {
@@ -74,6 +89,32 @@ export const appSlice = createSlice({
          state.categories = ["All", ...action.payload];
       },
       [getCategories.rejected]: (state, action) => {
+         state.pending = false;
+         state.error = true;
+      },
+      [getProductsInCategories.pending]: (state, action) => {
+         state.pending = true;
+         state.error = false;
+      },
+      [getProductsInCategories.fulfilled]: (state, action) => {
+         state.pending = false;
+         state.error = false;
+         state.items = action.payload;
+      },
+      [getProductsInCategories.rejected]: (state, action) => {
+         state.pending = false;
+         state.error = true;
+      },
+      [getItems.pending]: (state, action) => {
+         state.pending = true;
+         state.error = false;
+      },
+      [getItems.fulfilled]: (state, action) => {
+         state.pending = false;
+         state.error = false;
+         state.items = action.payload;
+      },
+      [getItems.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
       },

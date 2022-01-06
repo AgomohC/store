@@ -11,12 +11,13 @@ import { useNavigate } from "react-router-dom";
 import img from "../../assets/background.jpg";
 const useStyles = makeStyles((theme) => ({
    container: {
-      height: "calc(100vh - 56px)",
+      minHeight: "calc(100vh - 56px)",
+      height: "auto",
       [`${theme.breakpoints.up("xs")} and (orientation: landscape)`]: {
-         height: "calc(100vh - 48px)",
+         minHeight: "calc(100vh - 48px)",
       },
       [theme.breakpoints.up("sm")]: {
-         height: "calc(100vh - 64px)",
+         minHeight: "calc(100vh - 64px)",
       },
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
@@ -37,6 +38,8 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: 375,
       fontSize: "2rem",
       [theme.breakpoints.up("sm")]: {
+         maxWidth: 450,
+
          fontSize: "3rem",
       },
    },
@@ -45,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(3),
       fontSize: "3rem",
       [theme.breakpoints.up("sm")]: {
+         maxWidth: 720,
          marginBottom: theme.spacing(6),
          fontSize: "4.5rem",
       },
@@ -52,14 +56,18 @@ const useStyles = makeStyles((theme) => ({
          fontSize: "6rem",
       },
    },
+   padding: {
+      padding: theme.spacing(4),
+   },
 }));
 
 const WhiteButton = withStyles({
    root: {
       borderColor: "#fff",
-
       color: "#fff",
       textTransform: "capitalize",
+      paddingLeft: 56,
+      paddingRight: 56,
    },
 })(Button);
 
@@ -68,7 +76,7 @@ const Hero = () => {
    const navigate = useNavigate();
    return (
       <Grid container className={classes.container}>
-         <Grid item xs={10}>
+         <Grid item xs={10} className={classes.padding}>
             <Typography
                variant="h3"
                component="h2"

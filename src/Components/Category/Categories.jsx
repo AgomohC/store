@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Typography, Grid, makeStyles } from "@material-ui/core";
+import { Button, Grid, makeStyles } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
+import { getProductsInCategories } from "../../Redux/appSlice";
 
 const useStyles = makeStyles((theme) => ({
    container: {
@@ -18,12 +19,18 @@ const useStyles = makeStyles((theme) => ({
 const Categories = () => {
    const classes = useStyles();
    const { categories } = useSelector((state) => state.app);
+   const dispatch = useDispatch();
 
    return (
       <Grid container className={classes.container}>
-         {categories.map((category) => (
-            <Grid item className={classes.padding}>
-               <Button size="small" color="primary" variant="contained">
+         {categories.map((category, idx) => (
+            <Grid item key={idx} className={classes.padding}>
+               <Button
+                  size="small"
+                  color="primary"
+                  variant="contained"
+                  onClick={() => dispatch(getProductsInCategories(category))}
+               >
                   {category}
                </Button>
             </Grid>

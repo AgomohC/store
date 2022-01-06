@@ -2,31 +2,25 @@ import { createTheme } from "@material-ui/core";
 
 const theme = createTheme((theme) => ({
    typography: {
-      fontFamily: [
-         "Barlow Condensed",
-         "Roboto",
-         "Helvetica",
-         "Arial",
-         "sans-serif",
-      ].join(","),
-      // h1: {
-      //    fontFamily: ["Roboto", "sans-serif"].join(","),
-      // },
-      // h2: {
-      //    fontFamily: ["Roboto", "sans-serif"].join(","),
-      // },
-      // h3: {
-      //    fontFamily: ["Roboto", "sans-serif"].join(","),
-      // },
-      // h4: {
-      //    fontFamily: ["Roboto", "sans-serif"].join(","),
-      // },
-      // h5: {
-      //    fontFamily: ["Roboto", "sans-serif"].join(","),
-      // },
-      // h6: {
-      //    fontFamily: ["Roboto", "sans-serif"].join(","),
-      // },
+      fontFamily: ["Barlow Condensed", "sans-serif"].join(","),
+      h1: {
+         fontFamily: ["Barlow Condensed", "sans-serif"].join(","),
+      },
+      h2: {
+         fontFamily: ["Barlow Condensed", "sans-serif"].join(","),
+      },
+      h3: {
+         fontFamily: ["Barlow Condensed", "sans-serif"].join(","),
+      },
+      h4: {
+         fontFamily: ["Barlow Condensed", "sans-serif"].join(","),
+      },
+      h5: {
+         fontFamily: ["Barlow Condensed", "sans-serif"].join(","),
+      },
+      h6: {
+         fontFamily: ["Barlow Condensed", "sans-serif"].join(","),
+      },
    },
    breakpoints: {
       values: {
