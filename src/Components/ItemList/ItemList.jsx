@@ -13,9 +13,8 @@ const useStyles = makeStyles((theme) => ({
    container: {
       display: "flex",
       justifyContent: "center",
-      alignItems: "center",
-   },
-   progress: {
+      marginLeft: "auto",
+      marginRight: "auto",
       marginTop: theme.spacing(5),
    },
 }));
@@ -27,10 +26,18 @@ const ItemList = () => {
    return (
       <>
          {!pending ? (
-            mapThroughItems(items)
+            <Grid
+               className={classes.container}
+               container
+               spacing={4}
+               xs={10}
+               sm={8}
+            >
+               {mapThroughItems(items)}
+            </Grid>
          ) : (
             <Grid className={classes.container} container>
-               <CircularProgress className={classes.progress} size="6rem" />
+               <CircularProgress size="6rem" />
             </Grid>
          )}
       </>

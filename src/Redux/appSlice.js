@@ -17,9 +17,13 @@ export const getCategories = createAsyncThunk("get categories", async () => {
 
 export const getProductsInCategories = createAsyncThunk(
    "get products in each category",
-   async () => {
+   async (category) => {
+      if (category === "All") {
+         const { data } = await axios.get("https://fakestoreapi.com/products");
+         return data;
+      }
       const { data } = await axios.get(
-         "https://fakestoreapi.com/products/category/jewelery"
+         `https://fakestoreapi.com/products/category/${category}`
       );
       return data;
    }
