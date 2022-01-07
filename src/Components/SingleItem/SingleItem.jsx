@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
          height: 200,
       },
    },
+   letterSpace: {
+      letterSpacing: 3,
+   },
 }));
 
 const SingleItem = ({ item }) => {
@@ -42,7 +45,7 @@ const SingleItem = ({ item }) => {
                loading="lazy"
             />
             <CardContent>
-               <Typography gutterBottom variant="h6" component="h4">
+               <Typography gutterBottom variant="body1" component="h4">
                   {title.substring(0, 20)}...
                </Typography>
                <Typography variant="body2" color="textSecondary" component="p">
@@ -56,6 +59,7 @@ const SingleItem = ({ item }) => {
                   variant="contained"
                   color="primary"
                   onClick={() => navigate(`/products/${id}`)}
+                  className={classes.letterSpace}
                >
                   Learn More
                </Button>

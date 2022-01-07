@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
    padding: {
       padding: theme.spacing(1),
    },
+   letterSpace: {
+      letterSpacing: 3,
+   },
 }));
 
 const Categories = () => {
@@ -30,6 +33,7 @@ const Categories = () => {
                   color="primary"
                   variant="contained"
                   onClick={() => dispatch(getProductsInCategories(category))}
+                  className={classes.letterSpace}
                >
                   {category}
                </Button>

@@ -76,17 +76,17 @@ const Footer = () => {
          <Grid item>
             <Link href="mailto:chinaemerema@gmail.com" target="_blank">
                <IconButton>
-                  <EmailIcon />
+                  <EmailIcon className={classes.whiteText} />
                </IconButton>
             </Link>
             <Link href="https://github.com/AgomohC" target="_blank">
                <IconButton>
-                  <GitHubIcon />
+                  <GitHubIcon className={classes.whiteText} />
                </IconButton>
             </Link>
             <Link href="https://twitter.com/femto_ace" target="_blank">
                <IconButton>
-                  <TwitterIcon />
+                  <TwitterIcon className={classes.whiteText} />
                </IconButton>
             </Link>
          </Grid>

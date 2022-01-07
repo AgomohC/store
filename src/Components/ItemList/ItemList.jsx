@@ -39,7 +39,7 @@ const ItemList = () => {
             </Grid>
          ) : (
             <Grid className={classes.container} container>
-               <CircularProgress size="6rem" />
+               <CircularProgress size="5rem" />
             </Grid>
          )}
       </>

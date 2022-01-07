@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
    bigText: {
       maxWidth: 600,
       marginBottom: theme.spacing(3),
-      fontSize: "3rem",
+      fontSize: "3.5rem",
       [theme.breakpoints.up("sm")]: {
          maxWidth: 720,
          marginBottom: theme.spacing(6),
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
       },
    },
    padding: {
-      padding: theme.spacing(4),
+      paddingBottom: theme.spacing(4),
    },
 }));
 
@@ -68,6 +68,7 @@ const WhiteButton = withStyles({
       textTransform: "capitalize",
       paddingLeft: 56,
       paddingRight: 56,
+      letterSpacing: 2,
    },
 })(Button);
 
