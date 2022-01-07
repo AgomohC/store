@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 export const searchBarFunction = createAsyncThunk(
    "search for products",
@@ -88,6 +89,13 @@ export const appSlice = createSlice({
       [searchBarFunction.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
+         const dispatch = useDispatch();
+         dispatch(
+            openSnackBar({
+               text: "Something went wrong, please try again",
+               severity: "error",
+            })
+         );
       },
       [getCategories.pending]: (state, action) => {
          state.pending = true;
@@ -114,6 +122,13 @@ export const appSlice = createSlice({
       [getProductsInCategories.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
+         const dispatch = useDispatch();
+         dispatch(
+            openSnackBar({
+               text: "Something went wrong, please try again",
+               severity: "error",
+            })
+         );
       },
       [getItems.pending]: (state, action) => {
          state.pending = true;
@@ -127,6 +142,13 @@ export const appSlice = createSlice({
       [getItems.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
+         const dispatch = useDispatch();
+         dispatch(
+            openSnackBar({
+               text: "Something went wrong, please try again",
+               severity: "error",
+            })
+         );
       },
       [getSingleItem.pending]: (state, action) => {
          state.pending = true;
@@ -140,6 +162,13 @@ export const appSlice = createSlice({
       [getSingleItem.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
+         const dispatch = useDispatch();
+         dispatch(
+            openSnackBar({
+               text: "Something went wrong, please try again",
+               severity: "error",
+            })
+         );
       },
    },
 });

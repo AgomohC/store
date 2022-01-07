@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
    Grid,
    Typography,
@@ -9,6 +9,8 @@ import {
    Chip,
 } from "@material-ui/core";
 import classNames from "classnames";
+import { addToCart } from "../../Redux/cartSlice";
+import { openSnackBar } from "../../Redux/appSlice";
 
 const useStyles = makeStyles((theme) => ({
    container: {
@@ -23,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
    imgContainer: {
       width: "100%",
       height: "auto",
+      boxShadow: theme.shadows[3],
    },
    img: {
       width: "100%",
@@ -42,8 +45,20 @@ const useStyles = makeStyles((theme) => ({
 const SingleProduct = () => {
    const { singleItem } = useSelector((state) => state.app);
    const { pending } = useSelector((state) => state.cart);
+   const user = useSelector((state) => state.user.user);
+
    const classes = useStyles();
    const { title, price, description, category, image } = singleItem;
+   const dispatch = useDispatch();
+
+   const handleClick = () => {
+      if (!user) {
+         dispatch(openSnackBar({ severity: "error", text: "Please Log In" }));
+      } else {
+         // This dispatch requires the user id be passed into the addToCartFunction but fake store api doesn't support this so when i build my api, id add this feature
+         dispatch(addToCart(singleItem));
+      }
+   };
 
    return (
       <Grid container className={classes.container}>
@@ -78,6 +93,7 @@ const SingleProduct = () => {
                variant="contained"
                color="primary"
                disabled={pending}
+               onClick={handleClick}
             >
                Add to Cart
             </Button>

@@ -1,6 +1,7 @@
 import React from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import { Typography } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { closeSnackBar } from "../../Redux/appSlice";
 
@@ -27,7 +28,9 @@ const CustomSnackbar = () => {
          onClose={handleClose}
       >
          <Alert onClose={handleClose} severity={snackBarSeverity}>
-            {snackBarText}
+            <Typography variant="body1" color="initial">
+               {snackBarText}
+            </Typography>
          </Alert>
       </Snackbar>
    );
