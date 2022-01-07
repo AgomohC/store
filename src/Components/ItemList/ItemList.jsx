@@ -1,7 +1,7 @@
 import React from "react";
 import SingleItem from "../SingleItem/SingleItem";
 import { CircularProgress, makeStyles, Grid } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const mapThroughItems = (items) => {
    return items.map((item, idx) => {
@@ -16,12 +16,13 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "auto",
       marginRight: "auto",
       marginTop: theme.spacing(5),
+      marginBottom: theme.spacing(5),
    },
 }));
 
 const ItemList = () => {
    const classes = useStyles();
-   const dispatch = useDispatch();
+
    const { pending, items } = useSelector((state) => state.app);
    return (
       <>
@@ -29,6 +30,7 @@ const ItemList = () => {
             <Grid
                className={classes.container}
                container
+               item
                spacing={4}
                xs={10}
                sm={8}
