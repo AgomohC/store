@@ -8,21 +8,20 @@ import {
    Box,
    TextField,
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
-   container: {
-      minHeight: "100vh",
-   },
    formContainer: {
       minHeight: 320,
       minWidth: 320,
       maxWidth: 444,
       backgroundColor: theme.palette.grey[100],
       padding: theme.spacing(3),
+      margin: theme.spacing(3),
+
       borderRadius: theme.spacing(2),
       boxShadow: theme.shadows[2],
    },
@@ -73,85 +72,72 @@ const CheckoutInfo = () => {
    const handleSubmit = (event) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
-      const username = data.get("username");
-      const password = data.get("password");
+      const email = data.get("email");
+      const name = data.get("name");
+      const phoneNumber = data.get("phoneNumber");
       // dispatch(loginUser({ username, password }));
    };
 
    return (
       <>
          <Grid
-            className={classNames(
-               classes.container,
-               classes.flex,
-               classes.letterSpace
-            )}
-            container
+            className={classNames(classes.letterSpace, classes.formContainer)}
+            item
+            direction="column"
+            xs={12}
+            sm={6}
          >
-            <Grid
-               className={classes.formContainer}
-               item
-               direction="column"
-               xs={12}
-               sm={8}
-               md={6}
-               lg={4}
+            <Typography component="h1" variant="h4">
+               Checkout
+            </Typography>
+
+            <Box
+               component="form"
+               className={classes.marginTopTwo}
+               onSubmit={handleSubmit}
             >
-               <Typography component="h1" variant="h4">
-                  Checkout
-               </Typography>
-
-               <Box
-                  component="form"
+               <TextField
+                  required
+                  fullWidth
+                  type="text"
                   className={classes.marginTopTwo}
-                  onSubmit={handleSubmit}
-               >
-                  <TextField
-                     required
-                     fullWidth
-                     type="text"
-                     className={classes.marginTopTwo}
-                     id="email"
-                     label="Email"
-                     name="email"
-                     autoFocus
-                  />
-                  <TextField
-                     required
-                     fullWidth
-                     className={classes.marginTopTwo}
-                     name="name"
-                     label="Name"
-                     type="text"
-                     id="name"
-                  />
-                  <TextField
-                     required
-                     fullWidth
-                     className={classes.marginTopTwo}
-                     name="phone number"
-                     label="Phone Number"
-                     type="tel"
-                     id="phone number"
-                  />
+                  id="email"
+                  label="Email"
+                  name="email"
+                  autoFocus
+               />
+               <TextField
+                  required
+                  fullWidth
+                  className={classes.marginTopTwo}
+                  name="name"
+                  label="Name"
+                  type="text"
+                  id="name"
+               />
+               <TextField
+                  required
+                  fullWidth
+                  className={classes.marginTopTwo}
+                  name="phoneNumber"
+                  label="Phone Number"
+                  type="tel"
+                  id="phoneNumber"
+               />
 
-                  <Button
-                     type="submit"
-                     fullWidth
-                     variant="contained"
-                     color="primary"
-                     className={classes.marginTopThree}
-                     disabled={pending}
-                  >
-                     <Typography
-                        variant="body1"
-                        className={classes.letterSpace}
-                     >
-                        Checkout
-                     </Typography>
-                  </Button>
-               </Box>
-            </Grid>
+               <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.marginTopThree}
+                  disabled={pending}
+               >
+                  <Typography variant="body1" className={classes.letterSpace}>
+                     Checkout
+                  </Typography>
+               </Button>
+            </Box>
          </Grid>
       </>
    );
