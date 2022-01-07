@@ -103,6 +103,7 @@ const Header = () => {
    const dispatch = useDispatch();
    const navigate = useNavigate();
    const { isMenuOpen } = useSelector((state) => state.app);
+   const { cartLength } = useSelector((state) => state.cart);
    const user = useSelector((state) => state.user.user);
    const handleLogout = () => {
       dispatch(logOut());
@@ -166,7 +167,7 @@ const Header = () => {
                         onClick={() => navigate("/cart")}
                         className={classes.marginRightFour}
                      >
-                        <Badge badgeContent={4} color="secondary">
+                        <Badge badgeContent={cartLength} color="secondary">
                            <ShoppingCartIcon />
                         </Badge>
                         <Typography

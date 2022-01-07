@@ -3,7 +3,7 @@ import { AccountInfo } from "../../Components";
 const Account = () => {
    return (
       <>
-         <AccountInfo></AccountInfo>
+         <AccountInfo />
       </>
    );
 };
