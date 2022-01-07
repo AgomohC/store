@@ -39,6 +39,7 @@ const SingleItem = ({ item }) => {
                src={image}
                title={title}
                component="img"
+               loading="lazy"
             />
             <CardContent>
                <Typography gutterBottom variant="h6" component="h4">

@@ -1,9 +1,15 @@
 import React from "react";
-import { IconButton, Typography, Grid, makeStyles } from "@material-ui/core";
+import {
+   IconButton,
+   Typography,
+   Grid,
+   makeStyles,
+   Link,
+} from "@material-ui/core";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import EmailIcon from "@material-ui/icons/Email";
-import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import classNames from "classnames";
 
 const useStyles = makeStyles((theme) => ({
    container: {
@@ -12,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
       alignItems: "center",
       justifyContent: "center",
       position: "relative",
-      backgroundColor: theme.palette.grey[600],
+      backgroundColor: theme.palette.primary.main,
    },
    waveWrapper: {
       position: "absolute",
@@ -25,13 +31,26 @@ const useStyles = makeStyles((theme) => ({
    waveSvg: {
       position: "relative",
       display: "block",
-      width: "calc(100% + 1.3px)",
-      height: "110px",
-      transform: "rotateY(180deg)",
+      width: "calc(168% + 1.3px)",
+      height: 150,
+      [theme.breakpoints.up("sm")]: {
+         width: "calc(100% + 1.3px)",
+         height: 110,
+         transform: "rotateY(180deg)",
+      },
    },
 
    wavePath: {
       fill: "#fff",
+   },
+   whiteText: {
+      color: theme.palette.common.white,
+   },
+   centerText: {
+      textAlign: "center",
+   },
+   marginTopOne: {
+      marginTop: theme.spacing(1),
    },
 }));
 
@@ -55,24 +74,43 @@ const Footer = () => {
             </svg>
          </div>
          <Grid item>
-            <IconButton>
-               <EmailIcon size="3rem" />
-            </IconButton>
-            <IconButton>
-               <GitHubIcon />
-            </IconButton>
-            <IconButton>
-               <TwitterIcon />
-            </IconButton>
-            <IconButton>
-               <LinkedInIcon />
-            </IconButton>
+            <Link href="mailto:chinaemerema@gmail.com" target="_blank">
+               <IconButton>
+                  <EmailIcon />
+               </IconButton>
+            </Link>
+            <Link href="https://github.com/AgomohC" target="_blank">
+               <IconButton>
+                  <GitHubIcon />
+               </IconButton>
+            </Link>
+            <Link href="https://twitter.com/femto_ace" target="_blank">
+               <IconButton>
+                  <TwitterIcon />
+               </IconButton>
+            </Link>
          </Grid>
          <Grid item>
-            <Typography variant="body2" color="textSecondary">
+            <Typography
+               variant="body1"
+               className={classNames(
+                  classes.centerText,
+                  classes.whiteText,
+                  classes.marginTopOne
+               )}
+            >
                &copy; {year} Chinaemerem Agomoh.
             </Typography>
-            <Typography variant="body2"> All rights reserved</Typography>
+            <Typography
+               variant="body1"
+               className={classNames(
+                  classes.centerText,
+                  classes.whiteText,
+                  classes.marginTopOne
+               )}
+            >
+               All rights reserved
+            </Typography>
          </Grid>
       </Grid>
    );
