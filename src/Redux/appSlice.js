@@ -34,6 +34,11 @@ export const getItems = createAsyncThunk("get items", async () => {
    return data;
 });
 
+export const getSingleItem = createAsyncThunk("get Single Item", async (id) => {
+   const { data } = await axios.get(`https://fakestoreapi.com/products/${id}`);
+   return data;
+});
+
 export const appSlice = createSlice({
    name: "app",
    initialState: {
@@ -46,6 +51,7 @@ export const appSlice = createSlice({
       pending: false,
       items: [],
       error: false,
+      singleItem: {},
    },
    reducers: {
       closeSnackBar: (state) => {
@@ -119,6 +125,19 @@ export const appSlice = createSlice({
          state.items = action.payload;
       },
       [getItems.rejected]: (state, action) => {
+         state.pending = false;
+         state.error = true;
+      },
+      [getSingleItem.pending]: (state, action) => {
+         state.pending = true;
+         state.error = false;
+      },
+      [getSingleItem.fulfilled]: (state, action) => {
+         state.pending = false;
+         state.error = false;
+         state.singleItem = action.payload;
+      },
+      [getSingleItem.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
       },
