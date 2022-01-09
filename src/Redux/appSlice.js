@@ -1,18 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import "../axios";
 
 export const searchBarFunction = createAsyncThunk(
    "search for products",
    async (input) => {
-      const { data } = await axios.get(`https://fakestoreapi.com/products`);
-      return { data, input };
+      const { data } = await axios.get(`/products/${input}`);
+      return data;
    }
 );
 export const getCategories = createAsyncThunk("get categories", async () => {
-   const { data } = await axios.get(
-      "https://fakestoreapi.com/products/categories"
-   );
+   const { data } = await axios.get("/products/categories");
    return data;
 });
 
@@ -20,23 +18,21 @@ export const getProductsInCategories = createAsyncThunk(
    "get products in each category",
    async (category) => {
       if (category === "All") {
-         const { data } = await axios.get("https://fakestoreapi.com/products");
+         const { data } = await axios.get("/products");
          return data;
       }
-      const { data } = await axios.get(
-         `https://fakestoreapi.com/products/category/${category}`
-      );
+      const { data } = await axios.get(`/products/categories/${category}`);
       return data;
    }
 );
 
 export const getItems = createAsyncThunk("get items", async () => {
-   const { data } = await axios.get("https://fakestoreapi.com/products");
+   const { data } = await axios.get("/products");
    return data;
 });
 
 export const getSingleItem = createAsyncThunk("get Single Item", async (id) => {
-   const { data } = await axios.get(`https://fakestoreapi.com/products/${id}`);
+   const { data } = await axios.get(`/products/${id}`);
    return data;
 });
 
@@ -84,18 +80,11 @@ export const appSlice = createSlice({
       [searchBarFunction.fulfilled]: (state, action) => {
          state.pending = false;
          state.error = false;
-         state.items = action.payload.data;
+         state.items = action.payload;
       },
       [searchBarFunction.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
-         const dispatch = useDispatch();
-         dispatch(
-            openSnackBar({
-               text: "Something went wrong, please try again",
-               severity: "error",
-            })
-         );
       },
       [getCategories.pending]: (state, action) => {
          state.pending = true;
@@ -104,7 +93,7 @@ export const appSlice = createSlice({
       [getCategories.fulfilled]: (state, action) => {
          state.pending = false;
          state.error = false;
-         state.categories = ["All", ...action.payload];
+         state.categories = [...action.payload];
       },
       [getCategories.rejected]: (state, action) => {
          state.pending = false;
@@ -122,13 +111,6 @@ export const appSlice = createSlice({
       [getProductsInCategories.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
-         const dispatch = useDispatch();
-         dispatch(
-            openSnackBar({
-               text: "Something went wrong, please try again",
-               severity: "error",
-            })
-         );
       },
       [getItems.pending]: (state, action) => {
          state.pending = true;
@@ -142,13 +124,6 @@ export const appSlice = createSlice({
       [getItems.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
-         const dispatch = useDispatch();
-         dispatch(
-            openSnackBar({
-               text: "Something went wrong, please try again",
-               severity: "error",
-            })
-         );
       },
       [getSingleItem.pending]: (state, action) => {
          state.pending = true;
@@ -162,13 +137,6 @@ export const appSlice = createSlice({
       [getSingleItem.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
-         const dispatch = useDispatch();
-         dispatch(
-            openSnackBar({
-               text: "Something went wrong, please try again",
-               severity: "error",
-            })
-         );
       },
    },
 });

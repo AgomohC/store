@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SingleItem = ({ item }) => {
    const classes = useStyles();
-   const { id, title, image, price } = item;
+   const { _id, title, image, price } = item;
    const navigate = useNavigate();
    return (
       <Grid item xs={12} sm={6} lg={3}>
@@ -58,7 +58,7 @@ const SingleItem = ({ item }) => {
                   size="small"
                   variant="contained"
                   color="primary"
-                  onClick={() => navigate(`/products/${id}`)}
+                  onClick={() => navigate(`/products/${_id}`)}
                   className={classes.letterSpace}
                >
                   Learn More
