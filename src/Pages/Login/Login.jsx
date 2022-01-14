@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import classNames from "classnames";
 import {
    makeStyles,
@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../Redux/userSlice";
+import { openSnackBar } from "../../Redux/appSlice";
+
 const useStyles = makeStyles((theme) => ({
    container: {
       minHeight: "100vh",
@@ -67,8 +69,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Login = () => {
    const classes = useStyles();
-   const { user, pending } = useSelector((state) => state.user);
+   const { user, pending, error, errorMessage } = useSelector(
+      (state) => state.user
+   );
    const dispatch = useDispatch();
+
+   const isMounted = useRef(false);
 
    const handleSubmit = (event) => {
       event.preventDefault();
@@ -77,6 +83,18 @@ const Login = () => {
       const password = data.get("password");
       dispatch(loginUser({ username, password }));
    };
+   useEffect(() => {
+      if (isMounted.current) {
+         dispatch(
+            openSnackBar({
+               severity: "error",
+               text: errorMessage,
+            })
+         );
+      } else {
+         isMounted.current = true;
+      }
+   }, [errorMessage, error, dispatch]);
 
    return (
       <>

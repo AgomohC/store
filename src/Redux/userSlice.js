@@ -1,37 +1,42 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { openSnackBar } from "./appSlice";
-import { useDispatch } from "react-redux";
 
 export const loginUser = createAsyncThunk("login/user", async (user) => {
-   const { data } = await axios.post(
-      "https://fakestoreapi.com/auth/login",
-      user
-   );
+   const { data } = await axios.post("/auth/login", user);
+
    localStorage.setItem(
       "user",
       JSON.stringify({ name: user.username, token: data.token })
    );
-   const res = { username: user.username };
-   return res;
+   return data;
 });
 export const registerUser = createAsyncThunk("register/user", async (user) => {
-   const { data } = await axios.post("https://fakestoreapi.com/users", user);
+   const { lastName, firstName, email, username, password, confirmPassword } =
+      user;
+   if (password !== confirmPassword) {
+      return;
+   }
+   const { data } = await axios.post("/auth/register", {
+      lastName,
+      firstName,
+      email,
+      username,
+      password,
+   });
    localStorage.setItem(
       "user",
       JSON.stringify({ name: user.username, token: data.token })
    );
-   const res = { username: user.username };
-   return res;
+   return data;
 });
 
 export const userSlice = createSlice({
    name: "user",
    initialState: {
-      // user: { username: "john" },
       user: null,
       pending: false,
       error: false,
+      errorMessage: "",
    },
    reducers: {
       logOut: (state) => {
@@ -45,56 +50,34 @@ export const userSlice = createSlice({
       [loginUser.pending]: (state) => {
          state.pending = true;
          state.error = false;
+         state.errorMessage = "";
       },
       [loginUser.fulfilled]: (state, action) => {
          state.pending = false;
          state.error = false;
          state.user = action.payload;
-         const dispatch = useDispatch();
-         dispatch(
-            openSnackBar({
-               text: "Logged in successfully",
-               severity: "success",
-            })
-         );
+         state.errorMessage = "";
       },
       [loginUser.rejected]: (state) => {
          state.pending = false;
          state.error = true;
-         const dispatch = useDispatch();
-         dispatch(
-            openSnackBar({
-               text: "Something went wrong, please try again",
-               severity: "error",
-            })
-         );
+         state.errorMessage = "Something went wrong, Please try again";
       },
       [registerUser.pending]: (state) => {
          state.pending = true;
          state.error = false;
+         state.errorMessage = "";
       },
       [registerUser.fulfilled]: (state, action) => {
          state.pending = false;
          state.error = false;
-         state.user = action.payload;
-         const dispatch = useDispatch();
-         dispatch(
-            openSnackBar({
-               text: "Account created successfully, welcome!",
-               severity: "success",
-            })
-         );
+         state.user = action.payload.user;
+         state.errorMessage = "";
       },
-      [registerUser.rejected]: (state) => {
+      [registerUser.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
-         const dispatch = useDispatch();
-         dispatch(
-            openSnackBar({
-               text: "Something went wrong, please try again",
-               severity: "error",
-            })
-         );
+         state.errorMessage = "Something went wrong, Please try again";
       },
    },
 });
