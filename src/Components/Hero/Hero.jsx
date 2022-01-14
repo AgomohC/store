@@ -69,6 +69,10 @@ const WhiteButton = withStyles({
       paddingLeft: 56,
       paddingRight: 56,
       letterSpacing: 2,
+      "&:hover": {
+         backgroundColor: "#fff",
+         color: "#0b0d17",
+      },
    },
 })(Button);
 

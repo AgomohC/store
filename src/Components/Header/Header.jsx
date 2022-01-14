@@ -16,9 +16,10 @@ import {
    Fade,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { openMenu } from "../../Redux/appSlice";
+import { openMenu, closeMenu } from "../../Redux/appSlice";
 import classNames from "classnames";
 import { logOut } from "../../Redux/userSlice";
+import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -112,14 +113,25 @@ const Header = () => {
       <>
          <AppBar position="static" color="primary">
             <Toolbar className={classes.root}>
-               <IconButton
-                  edge="start"
-                  className={classes.menuButton}
-                  color="inherit"
-                  onClick={() => dispatch(openMenu())}
-               >
-                  <MenuIcon />
-               </IconButton>
+               {isMenuOpen ? (
+                  <IconButton
+                     onClick={() => dispatch(closeMenu())}
+                     edge="start"
+                     className={classes.menuButton}
+                     color="inherit"
+                  >
+                     <CloseIcon className={classes.whiteText} />
+                  </IconButton>
+               ) : (
+                  <IconButton
+                     edge="start"
+                     className={classes.menuButton}
+                     color="inherit"
+                     onClick={() => dispatch(openMenu())}
+                  >
+                     <MenuIcon />
+                  </IconButton>
+               )}
                <Typography
                   className={classNames(classes.logo, classes.letterSpace)}
                   variant="h4"

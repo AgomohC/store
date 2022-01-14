@@ -1,6 +1,5 @@
 import React from "react";
-import CloseIcon from "@material-ui/icons/Close";
-import { makeStyles, Grid, IconButton, Typography } from "@material-ui/core";
+import { makeStyles, Grid, Typography } from "@material-ui/core";
 import { closeMenu } from "../../Redux/appSlice";
 import { useDispatch } from "react-redux";
 
@@ -31,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
    },
    linkText: {
       marginTop: theme.spacing(2),
+      textAlign: "left",
    },
    close: {
       position: "absolute",
@@ -56,31 +56,35 @@ const Menu = () => {
    const dispatch = useDispatch();
    return (
       <Grid component="aside" item container xs={12} className={classes.root}>
-         <IconButton
-            onClick={() => dispatch(closeMenu())}
-            className={classes.close}
-         >
-            <CloseIcon className={classes.whiteText} />
-         </IconButton>
          <Grid item container direction="column" className={classes.navLinks}>
-            <Typography
-               variant="h6"
-               color="inherit"
-               className={classes.linkText}
-            >
-               <Link to="/products" className={classes.link}>
-                  Products
-               </Link>
-            </Typography>
-            <Typography
-               variant="h6"
-               color="inherit"
-               className={classes.linkText}
-            >
-               <Link to="/account" className={classes.link}>
-                  My Account
-               </Link>
-            </Typography>
+            <Grid>
+               <Typography
+                  variant="h6"
+                  color="inherit"
+                  className={classes.linkText}
+               >
+                  <Link
+                     to="/products"
+                     onClick={() => dispatch(closeMenu())}
+                     className={classes.link}
+                  >
+                     Products
+                  </Link>
+               </Typography>
+               <Typography
+                  variant="h6"
+                  color="inherit"
+                  className={classes.linkText}
+               >
+                  <Link
+                     to="/account"
+                     onClick={() => dispatch(closeMenu())}
+                     className={classes.link}
+                  >
+                     My Account
+                  </Link>
+               </Typography>
+            </Grid>
          </Grid>
       </Grid>
    );
