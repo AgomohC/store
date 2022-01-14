@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import classNames from "classnames";
 import {
    makeStyles,
@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { registerUser } from "../../Redux/userSlice";
+import { openSnackBar } from "../../Redux/appSlice";
 
 const useStyles = makeStyles((theme) => ({
    container: {
@@ -68,8 +69,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 const SignUp = () => {
    const classes = useStyles();
-   const { user, pending } = useSelector((state) => state.user);
+   const { user, pending, error, errorMessage } = useSelector(
+      (state) => state.user
+   );
    const dispatch = useDispatch();
+
+   const isMounted = useRef(false);
 
    const handleSubmit = (event) => {
       event.preventDefault();
@@ -80,19 +85,38 @@ const SignUp = () => {
       const username = data.get("username");
       const password = data.get("password");
       const confirmPassword = data.get("confirmPassword");
-
-      dispatch(
-         registerUser({
-            lastName,
-            firstName,
-            email,
-            username,
-            password,
-            confirmPassword,
-         })
-      );
+      if (password === confirmPassword) {
+         dispatch(
+            registerUser({
+               lastName,
+               firstName,
+               email,
+               username,
+               password,
+            })
+         );
+      }
+      if (password !== confirmPassword) {
+         dispatch(
+            openSnackBar({
+               text: "Passwords do not correspond",
+               severity: "error",
+            })
+         );
+      }
    };
-
+   useEffect(() => {
+      if (isMounted.current) {
+         dispatch(
+            openSnackBar({
+               severity: "error",
+               text: errorMessage,
+            })
+         );
+      } else {
+         isMounted.current = true;
+      }
+   }, [errorMessage, error, dispatch]);
    return (
       <>
          {user && <Navigate to="/account" />};

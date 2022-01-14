@@ -8,14 +8,11 @@ export const loginUser = createAsyncThunk("login/user", async (user) => {
       "user",
       JSON.stringify({ name: user.username, token: data.token })
    );
-   return data;
+   return data.user;
 });
 export const registerUser = createAsyncThunk("register/user", async (user) => {
-   const { lastName, firstName, email, username, password, confirmPassword } =
-      user;
-   if (password !== confirmPassword) {
-      return;
-   }
+   const { lastName, firstName, email, username, password } = user;
+
    const { data } = await axios.post("/auth/register", {
       lastName,
       firstName,
@@ -27,7 +24,7 @@ export const registerUser = createAsyncThunk("register/user", async (user) => {
       "user",
       JSON.stringify({ name: user.username, token: data.token })
    );
-   return data;
+   return data.user;
 });
 
 export const userSlice = createSlice({
@@ -71,7 +68,7 @@ export const userSlice = createSlice({
       [registerUser.fulfilled]: (state, action) => {
          state.pending = false;
          state.error = false;
-         state.user = action.payload.user;
+         state.user = action.payload;
          state.errorMessage = "";
       },
       [registerUser.rejected]: (state, action) => {
