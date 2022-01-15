@@ -41,7 +41,7 @@ export const appSlice = createSlice({
    name: "app",
    initialState: {
       snackBarOpen: false,
-      snackBarSeverity: "",
+      snackBarSeverity: "success",
       snackBarText: "",
       isMenuOpen: false,
       searchValue: "",
@@ -54,7 +54,6 @@ export const appSlice = createSlice({
    reducers: {
       closeSnackBar: (state) => {
          state.snackBarOpen = false;
-         state.snackBarSeverity = "";
          state.snackBarText = "";
       },
       openSnackBar: (state, action) => {

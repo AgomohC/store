@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Menu from "../Menu/Menu";
 import { Link, useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -20,6 +20,7 @@ import { openMenu, closeMenu } from "../../Redux/appSlice";
 import classNames from "classnames";
 import { logOut } from "../../Redux/userSlice";
 import CloseIcon from "@material-ui/icons/Close";
+import { fetchCartItems } from "../../Redux/cartSlice";
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -106,10 +107,15 @@ const Header = () => {
    const { isMenuOpen } = useSelector((state) => state.app);
    const { cartLength } = useSelector((state) => state.cart);
    const { user } = useSelector((state) => state.user);
-   console.log(user);
+
    const handleLogout = () => {
       dispatch(logOut());
    };
+   console.log(cartLength);
+   useEffect(() => {
+      dispatch(fetchCartItems());
+   }, [dispatch]);
+
    return (
       <>
          <AppBar position="static" color="primary">

@@ -133,6 +133,7 @@ const SignUp = () => {
             <Grid
                className={classes.formContainer}
                item
+               container
                direction="column"
                xs={12}
                sm={8}

@@ -113,6 +113,7 @@ const Login = () => {
                className={classes.formContainer}
                item
                direction="column"
+               container
                xs={12}
                sm={8}
                md={6}

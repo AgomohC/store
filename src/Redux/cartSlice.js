@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { openSnackBar } from "./appSlice";
-import { useDispatch } from "react-redux";
 
 export const addToCart = createAsyncThunk("cart/add", async (item) => {
    const { data } = await axios.post(`/cart`, item);
@@ -11,6 +9,8 @@ export const addToCart = createAsyncThunk("cart/add", async (item) => {
 
 export const fetchCartItems = createAsyncThunk("cart/fetchAll", async () => {
    const { data } = await axios.get(`/cart`);
+
+   return data;
 });
 
 export const cartSlice = createSlice({
