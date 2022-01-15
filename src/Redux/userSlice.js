@@ -1,16 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const loginUser = createAsyncThunk("login/user", async (user) => {
+export const loginUser = createAsyncThunk("user/login", async (user) => {
    const { data } = await axios.post("/auth/login", user);
 
    localStorage.setItem(
       "user",
-      JSON.stringify({ name: user.username, token: data.token })
+      JSON.stringify({ data: data.user, token: data.token })
    );
    return data.user;
 });
-export const registerUser = createAsyncThunk("register/user", async (user) => {
+export const registerUser = createAsyncThunk("user/register", async (user) => {
    const { lastName, firstName, email, username, password } = user;
 
    const { data } = await axios.post("/auth/register", {
@@ -22,15 +22,17 @@ export const registerUser = createAsyncThunk("register/user", async (user) => {
    });
    localStorage.setItem(
       "user",
-      JSON.stringify({ name: user.username, token: data.token })
+      JSON.stringify({ data: data.user, token: data.token })
    );
    return data.user;
 });
 
+const user = JSON.parse(localStorage.getItem("user")).data;
+
 export const userSlice = createSlice({
    name: "user",
    initialState: {
-      user: null,
+      user: user ? user : null,
       pending: false,
       error: false,
       errorMessage: "",

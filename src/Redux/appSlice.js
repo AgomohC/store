@@ -5,7 +5,8 @@ import "../axios";
 export const searchBarFunction = createAsyncThunk(
    "search for products",
    async (input) => {
-      const { data } = await axios.get(`/products/${input}`);
+      console.log(input);
+      const { data } = await axios.get(`/products/search/${input}`);
       return data;
    }
 );

@@ -105,7 +105,8 @@ const Header = () => {
    const navigate = useNavigate();
    const { isMenuOpen } = useSelector((state) => state.app);
    const { cartLength } = useSelector((state) => state.cart);
-   const user = useSelector((state) => state.user.user);
+   const { user } = useSelector((state) => state.user);
+   console.log(user);
    const handleLogout = () => {
       dispatch(logOut());
    };

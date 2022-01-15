@@ -85,12 +85,14 @@ const Login = () => {
    };
    useEffect(() => {
       if (isMounted.current) {
-         dispatch(
-            openSnackBar({
-               severity: "error",
-               text: errorMessage,
-            })
-         );
+         if (error) {
+            dispatch(
+               openSnackBar({
+                  severity: "error",
+                  text: errorMessage,
+               })
+            );
+         }
       } else {
          isMounted.current = true;
       }

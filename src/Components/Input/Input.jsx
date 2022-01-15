@@ -75,6 +75,7 @@ const Input = () => {
                inputProps={{ "aria-label": "search" }}
                value={searchValue}
                onChange={handleChange}
+               name="searchValue"
             />
          </div>
       </Grid>

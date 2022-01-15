@@ -3,10 +3,14 @@ import axios from "axios";
 import { openSnackBar } from "./appSlice";
 import { useDispatch } from "react-redux";
 
-export const addToCart = createAsyncThunk("add to cart", async (item) => {
-   const { data } = axios.post(`https://fakestoreapi.com/carts`, item);
+export const addToCart = createAsyncThunk("cart/add", async (item) => {
+   const { data } = await axios.post(`/cart`, item);
    //  return the full cart object belonging to the user
    return data;
+});
+
+export const fetchCartItems = createAsyncThunk("cart/fetchAll", async () => {
+   const { data } = await axios.get(`/cart`);
 });
 
 export const cartSlice = createSlice({
@@ -26,25 +30,28 @@ export const cartSlice = createSlice({
       [addToCart.fulfilled]: (state, action) => {
          state.pending = false;
          state.error = false;
-         state.cartItems = action.payload;
-         const dispatch = useDispatch();
-         dispatch(
-            openSnackBar({
-               text: "Added to Cart",
-               severity: "success",
-            })
-         );
+         state.cartItems = action.payload.products;
+         state.cartLength = action.payload.count;
       },
       [addToCart.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
-         const dispatch = useDispatch();
-         dispatch(
-            openSnackBar({
-               text: "Something went wrong, please try again",
-               severity: "error",
-            })
-         );
+      },
+      [fetchCartItems.pending]: (state, action) => {
+         state.pending = true;
+         state.error = false;
+      },
+
+      [fetchCartItems.fulfilled]: (state, action) => {
+         state.pending = false;
+         state.error = false;
+         state.cartItems = action.payload.products;
+         state.cartLength = action.payload.count;
+      },
+
+      [fetchCartItems.rejected]: (state, action) => {
+         state.pending = false;
+         state.error = true;
       },
    },
 });
