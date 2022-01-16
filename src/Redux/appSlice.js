@@ -59,6 +59,7 @@ export const appSlice = createSlice({
       items: [],
       error: false,
       singleItem: {},
+      isAlertOpen: false,
    },
    reducers: {
       closeSnackBar: (state) => {
@@ -79,6 +80,12 @@ export const appSlice = createSlice({
       },
       setSearchBarValue: (state, action) => {
          state.searchValue = action.payload;
+      },
+      openAlert: (state) => {
+         state.isAlertOpen = true;
+      },
+      closeAlert: (state) => {
+         state.isAlertOpen = false;
       },
    },
    extraReducers: {
@@ -156,6 +163,8 @@ export const {
    openMenu,
    closeMenu,
    setSearchBarValue,
+   openAlert,
+   closeAlert,
 } = appSlice.actions;
 
 export default appSlice.reducer;

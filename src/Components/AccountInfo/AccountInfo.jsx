@@ -7,7 +7,9 @@ import {
    makeStyles,
    withStyles,
 } from "@material-ui/core";
-import { logOut } from "../../Redux/userSlice";
+import { logOut, deleteUser } from "../../Redux/userSlice";
+import { openAlert, closeAlert } from "../../Redux/appSlice";
+import classNames from "classnames";
 
 const useStyles = makeStyles((theme) => ({
    container: {
@@ -20,6 +22,14 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: theme.spacing(2),
       boxShadow: theme.shadows[2],
       padding: theme.spacing(3),
+   },
+   alertContainer: {
+      backgroundColor: theme.palette.error.light,
+      padding: theme.spacing(2),
+      color: theme.palette.common.white,
+   },
+   marginTopOne: {
+      marginTop: theme.spacing(1),
    },
    marginTopThree: {
       marginTop: theme.spacing(3),
@@ -58,12 +68,28 @@ const WarningButton = withStyles((theme) => ({
       },
    },
 }))(Button);
+const WhiteButton = withStyles((theme) => ({
+   root: {
+      borderColor: theme.palette.common.white,
+      backgroundColor: "transparent",
+      color: theme.palette.common.white,
+      letterSpacing: 2,
+      transition: "0.3s all ease-in-out",
+      "&:hover": {
+         transform: "ScaleX(1.05)",
+         color: theme.palette.primary.main,
+         borderColor: theme.palette.common.white,
+         backgroundColor: theme.palette.common.white,
+      },
+   },
+}))(Button);
 
 const AccountInfo = () => {
    const classes = useStyles();
    const {
       user: { firstName, lastName, email, username },
    } = useSelector((state) => state.user);
+   const { isAlertOpen } = useSelector((state) => state.app);
    const dispatch = useDispatch();
 
    const handleLogout = () => {
@@ -124,10 +150,44 @@ const AccountInfo = () => {
                <DangerButton
                   variant="contained"
                   className={classes.marginLeftTwo}
+                  onClick={() => dispatch(openAlert())}
                >
                   Delete Account
                </DangerButton>
             </Grid>
+            {isAlertOpen && (
+               <Grid
+                  item
+                  className={classNames(
+                     classes.marginTopThree,
+                     classes.alertContainer
+                  )}
+               >
+                  <Typography variant="body1" color="initial">
+                     Are you sure? This process cannot be reversed.
+                  </Typography>
+
+                  <Grid item className={classes.marginTopOne}>
+                     <WhiteButton
+                        variant="outlined"
+                        onClick={() => dispatch(closeAlert())}
+                        color="initial"
+                     >
+                        Go back
+                     </WhiteButton>
+                     <DangerButton
+                        variant="contained"
+                        className={classes.marginLeftTwo}
+                        onClick={() => {
+                           dispatch(deleteUser());
+                           dispatch(closeAlert());
+                        }}
+                     >
+                        Delete
+                     </DangerButton>
+                  </Grid>
+               </Grid>
+            )}
          </Grid>
       </Grid>
    );

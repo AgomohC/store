@@ -40,7 +40,18 @@ export const registerUser = createAsyncThunk(
       }
    }
 );
-
+export const deleteUser = createAsyncThunk(
+   "user/delete",
+   async (user, { rejectWithValue }) => {
+      try {
+         const { data } = await axios.delete("/auth/delete");
+         localStorage.removeItem("user");
+         return data;
+      } catch (err) {
+         return rejectWithValue(err.response.data);
+      }
+   }
+);
 const user = JSON.parse(localStorage.getItem("user"));
 
 export const userSlice = createSlice({
@@ -56,6 +67,7 @@ export const userSlice = createSlice({
          state.user = null;
          state.pending = false;
          state.error = false;
+         state.errorMessage = "";
          localStorage.removeItem("user");
       },
    },
@@ -88,6 +100,22 @@ export const userSlice = createSlice({
          state.errorMessage = "";
       },
       [registerUser.rejected]: (state, action) => {
+         state.pending = false;
+         state.error = true;
+         state.errorMessage = action.payload.error;
+      },
+      [deleteUser.pending]: (state) => {
+         state.pending = true;
+         state.error = false;
+         state.errorMessage = "";
+      },
+      [deleteUser.fulfilled]: (state) => {
+         state.user = null;
+         state.pending = false;
+         state.error = false;
+         state.errorMessage = "";
+      },
+      [deleteUser.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
          state.errorMessage = action.payload.error;
