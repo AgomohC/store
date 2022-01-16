@@ -48,15 +48,14 @@ const SingleProduct = () => {
    const user = useSelector((state) => state.user.user);
 
    const classes = useStyles();
-   const { title, price, description, category, image } = singleItem;
+   const { title, price, description, category, image, _id } = singleItem;
    const dispatch = useDispatch();
 
    const handleClick = () => {
       if (!user) {
          dispatch(openSnackBar({ severity: "error", text: "Please Log In" }));
       } else {
-         // This dispatch requires the user id be passed into the addToCartFunction but fake store api doesn't support this so when i build my api, id add this feature
-         dispatch(addToCart(singleItem));
+         dispatch(addToCart(_id));
       }
    };
 

@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const addToCart = createAsyncThunk("cart/add", async (item) => {
-   const { data } = await axios.post(`/cart`, item);
+export const addToCart = createAsyncThunk("cart/add", async (id) => {
+   const { data } = await axios.post(`/cart`, { product_id: id });
    //  return the full cart object belonging to the user
    return data;
 });
