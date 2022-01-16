@@ -98,6 +98,12 @@ const useStyles = makeStyles((theme) => ({
          display: "flex",
       },
    },
+   transition: {
+      transition: "0.3s all ease-out",
+      "&:hover": {
+         transform: "ScaleX(1.1)",
+      },
+   },
 }));
 
 const Header = () => {
@@ -124,7 +130,10 @@ const Header = () => {
                   <IconButton
                      onClick={() => dispatch(closeMenu())}
                      edge="start"
-                     className={classes.menuButton}
+                     className={classNames(
+                        classes.transition,
+                        classes.menuButton
+                     )}
                      color="inherit"
                   >
                      <CloseIcon className={classes.whiteText} />
@@ -132,7 +141,10 @@ const Header = () => {
                ) : (
                   <IconButton
                      edge="start"
-                     className={classes.menuButton}
+                     className={classNames(
+                        classes.transition,
+                        classes.menuButton
+                     )}
                      color="inherit"
                      onClick={() => dispatch(openMenu())}
                   >
@@ -165,6 +177,7 @@ const Header = () => {
                         onClick={() => {
                            navigate("/products");
                         }}
+                        className={classes.transition}
                      >
                         <Typography
                            variant="body1"
@@ -228,6 +241,7 @@ const Header = () => {
                               variant="contained"
                               color="secondary"
                               onClick={handleLogout}
+                              className={classes.transition}
                            >
                               <Typography
                                  variant="body1"
@@ -261,7 +275,10 @@ const Header = () => {
                               size="small"
                               variant="contained"
                               onClick={() => navigate("/register")}
-                              className={classes.hideMini}
+                              className={classNames(
+                                 classes.transition,
+                                 classes.hideMini
+                              )}
                            >
                               <Typography
                                  variant="body1"
