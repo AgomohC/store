@@ -60,6 +60,7 @@ const Input = () => {
       dispatch(setSearchBarValue(event.target.value));
       dispatch(searchBarFunction(event.target.value));
    };
+
    return (
       <Grid container className={classes.container}>
          <div className={classes.search}>

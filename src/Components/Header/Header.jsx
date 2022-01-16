@@ -111,7 +111,7 @@ const Header = () => {
    const handleLogout = () => {
       dispatch(logOut());
    };
-   console.log(cartLength);
+
    useEffect(() => {
       dispatch(fetchCartItems());
    }, [dispatch]);

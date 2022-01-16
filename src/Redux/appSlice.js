@@ -3,20 +3,26 @@ import axios from "axios";
 import "../axios";
 
 export const searchBarFunction = createAsyncThunk(
-   "search for products",
+   "products/search",
    async (input) => {
-      console.log(input);
+      if (input.length < 1) {
+         const { data } = await axios.get("/products");
+         return data;
+      }
       const { data } = await axios.get(`/products/search/${input}`);
       return data;
    }
 );
-export const getCategories = createAsyncThunk("get categories", async () => {
-   const { data } = await axios.get("/products/categories");
-   return data;
-});
+export const getCategories = createAsyncThunk(
+   "products/getCategories",
+   async () => {
+      const { data } = await axios.get("/products/categories");
+      return data;
+   }
+);
 
 export const getProductsInCategories = createAsyncThunk(
-   "get products in each category",
+   "products/productsInCategories",
    async (category) => {
       if (category === "All") {
          const { data } = await axios.get("/products");
@@ -27,15 +33,18 @@ export const getProductsInCategories = createAsyncThunk(
    }
 );
 
-export const getItems = createAsyncThunk("get items", async () => {
+export const getItems = createAsyncThunk("products/fetch", async () => {
    const { data } = await axios.get("/products");
    return data;
 });
 
-export const getSingleItem = createAsyncThunk("get Single Item", async (id) => {
-   const { data } = await axios.get(`/products/${id}`);
-   return data;
-});
+export const getSingleItem = createAsyncThunk(
+   "products/getSingleItem",
+   async (id) => {
+      const { data } = await axios.get(`/products/single/${id}`);
+      return data;
+   }
+);
 
 export const appSlice = createSlice({
    name: "app",
@@ -73,7 +82,7 @@ export const appSlice = createSlice({
       },
    },
    extraReducers: {
-      [searchBarFunction.pending]: (state, action) => {
+      [searchBarFunction.pending]: (state) => {
          state.pending = true;
          state.error = false;
       },
@@ -82,11 +91,11 @@ export const appSlice = createSlice({
          state.error = false;
          state.items = action.payload;
       },
-      [searchBarFunction.rejected]: (state, action) => {
+      [searchBarFunction.rejected]: (state) => {
          state.pending = false;
          state.error = true;
       },
-      [getCategories.pending]: (state, action) => {
+      [getCategories.pending]: (state) => {
          state.pending = true;
          state.error = false;
       },
@@ -95,11 +104,11 @@ export const appSlice = createSlice({
          state.error = false;
          state.categories = [...action.payload];
       },
-      [getCategories.rejected]: (state, action) => {
+      [getCategories.rejected]: (state) => {
          state.pending = false;
          state.error = true;
       },
-      [getProductsInCategories.pending]: (state, action) => {
+      [getProductsInCategories.pending]: (state) => {
          state.pending = true;
          state.error = false;
       },
@@ -112,7 +121,7 @@ export const appSlice = createSlice({
          state.pending = false;
          state.error = true;
       },
-      [getItems.pending]: (state, action) => {
+      [getItems.pending]: (state) => {
          state.pending = true;
          state.error = false;
       },
@@ -125,7 +134,7 @@ export const appSlice = createSlice({
          state.pending = false;
          state.error = true;
       },
-      [getSingleItem.pending]: (state, action) => {
+      [getSingleItem.pending]: (state) => {
          state.pending = true;
          state.error = false;
       },

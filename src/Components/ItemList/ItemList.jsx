@@ -1,6 +1,11 @@
 import React from "react";
 import SingleItem from "../SingleItem/SingleItem";
-import { CircularProgress, makeStyles, Grid } from "@material-ui/core";
+import {
+   CircularProgress,
+   makeStyles,
+   Grid,
+   Typography,
+} from "@material-ui/core";
 import { useSelector } from "react-redux";
 import classNames from "classnames";
 
@@ -17,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "auto",
       marginRight: "auto",
       marginTop: theme.spacing(5),
-      marginBottom: theme.spacing(5),
+      marginBottom: theme.spacing(10),
    },
    progress: {
       padding: theme.spacing(10),
