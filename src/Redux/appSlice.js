@@ -80,6 +80,18 @@ export const appSlice = createSlice({
       setSearchBarValue: (state, action) => {
          state.searchValue = action.payload;
       },
+      resetApp: (state) => {
+         state.snackBarOpen = false;
+         state.snackBarSeverity = "success";
+         state.snackBarText = "";
+         state.isMenuOpen = false;
+         state.searchValue = "";
+         state.categories = [];
+         state.pending = false;
+         state.items = [];
+         state.error = false;
+         state.singleItem = {};
+      },
    },
    extraReducers: {
       [searchBarFunction.pending]: (state) => {
@@ -156,6 +168,7 @@ export const {
    openMenu,
    closeMenu,
    setSearchBarValue,
+   resetApp,
 } = appSlice.actions;
 
 export default appSlice.reducer;

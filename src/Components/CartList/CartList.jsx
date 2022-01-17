@@ -46,7 +46,6 @@ const CartList = () => {
                alignItems="center"
                container
                item
-               spacing={4}
                xs={10}
                sm={8}
             >
@@ -63,14 +62,7 @@ const CartList = () => {
             </Grid>
          )}
          {!pending ? (
-            <Grid
-               className={classes.container}
-               container
-               item
-               spacing={4}
-               xs={10}
-               sm={8}
-            >
+            <Grid className={classes.container} container item xs={10} sm={8}>
                {mapThroughItems(cartItems)}
             </Grid>
          ) : (

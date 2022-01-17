@@ -8,6 +8,8 @@ import {
    withStyles,
 } from "@material-ui/core";
 import { logOut } from "../../Redux/userSlice";
+import { resetCart } from "../../Redux/cartSlice";
+import { resetApp } from "../../Redux/appSlice";
 
 const useStyles = makeStyles((theme) => ({
    container: {
@@ -65,6 +67,8 @@ const AccountInfo = () => {
 
    const handleLogout = () => {
       dispatch(logOut());
+      dispatch(resetApp());
+      dispatch(resetCart());
    };
    return (
       <Grid

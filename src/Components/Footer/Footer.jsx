@@ -58,7 +58,12 @@ const Footer = () => {
    const classes = useStyles();
    const year = new Date().getFullYear();
    return (
-      <Grid container direction="column" className={classes.container}>
+      <Grid
+         component="footer"
+         container
+         direction="column"
+         className={classes.container}
+      >
          <div className={classes.waveWrapper}>
             <svg
                data-name="Layer 1"

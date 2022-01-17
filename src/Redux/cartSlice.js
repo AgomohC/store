@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const addToCart = createAsyncThunk("cart/add", async (id) => {
    const { data } = await axios.post(`/cart`, { product_id: id });
-   //  return the full cart object belonging to the user
+
    return data;
 });
 
@@ -21,7 +21,14 @@ export const cartSlice = createSlice({
       error: false,
       pending: false,
    },
-   reducers: {},
+   reducers: {
+      resetCart: (state) => {
+         state.cartItems = [];
+         state.cartLength = 0;
+         state.error = false;
+         state.pending = false;
+      },
+   },
    extraReducers: {
       [addToCart.pending]: (state, action) => {
          state.pending = true;
@@ -56,6 +63,6 @@ export const cartSlice = createSlice({
    },
 });
 
-export const {} = cartSlice.actions;
+export const { resetCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

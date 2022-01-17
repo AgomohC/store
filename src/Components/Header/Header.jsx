@@ -21,6 +21,8 @@ import classNames from "classnames";
 import { logOut } from "../../Redux/userSlice";
 import CloseIcon from "@material-ui/icons/Close";
 import { fetchCartItems } from "../../Redux/cartSlice";
+import { resetCart } from "../../Redux/cartSlice";
+import { resetApp } from "../../Redux/appSlice";
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -116,6 +118,8 @@ const Header = () => {
 
    const handleLogout = () => {
       dispatch(logOut());
+      dispatch(resetApp());
+      dispatch(resetCart());
    };
 
    useEffect(() => {
