@@ -23,6 +23,16 @@ const useStyles = makeStyles((theme) => ({
    progress: {
       padding: theme.spacing(10),
    },
+   priceDiv: {
+      backgroundColor: theme.palette.grey[100],
+      borderRadius: theme.spacing(2),
+      boxShadow: theme.shadows[2],
+      overflow: "hidden",
+      padding: theme.spacing(3),
+   },
+   btnContainer: {
+      marginTop: theme.spacing(2),
+   },
 }));
 
 const mapThroughItems = (items) => {
@@ -64,6 +74,38 @@ const CartList = () => {
          {!pending ? (
             <Grid className={classes.container} container item xs={10} sm={8}>
                {mapThroughItems(cartItems)}
+               <Grid
+                  item
+                  container
+                  justifyContent="flex-end"
+                  xs={12}
+                  className={classes.priceDiv}
+               >
+                  <Typography variant="h6" color="initial">
+                     Total:
+                  </Typography>
+               </Grid>
+               <Grid
+                  item
+                  container
+                  justifyContent="flex-end"
+                  className={classes.btnContainer}
+               >
+                  <Button variant="contained">Clear Cart</Button>
+                  <Button
+                     onClick={() => navigate("/products")}
+                     variant="contained"
+                     color="primary"
+                  >
+                     Continue Shopping
+                  </Button>
+                  <Button
+                     variant="contained"
+                     onClick={() => navigate("/checkout")}
+                  >
+                     Checkout
+                  </Button>
+               </Grid>
             </Grid>
          ) : (
             <Grid

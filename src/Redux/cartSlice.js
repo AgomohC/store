@@ -12,6 +12,10 @@ export const fetchCartItems = createAsyncThunk("cart/fetchAll", async () => {
 
    return data;
 });
+export const clearCart = createAsyncThunk("cart/clearCart", async () => {
+   const { data } = await axios.delete(`/cart/delete_all`);
+   return data;
+});
 
 export const cartSlice = createSlice({
    name: "cart",
@@ -57,6 +61,22 @@ export const cartSlice = createSlice({
       },
 
       [fetchCartItems.rejected]: (state, action) => {
+         state.pending = false;
+         state.error = true;
+      },
+      [clearCart.pending]: (state, action) => {
+         state.pending = true;
+         state.error = false;
+      },
+
+      [clearCart.fulfilled]: (state, action) => {
+         state.pending = false;
+         state.error = false;
+         state.cartItems = [];
+         state.cartLength = 0;
+      },
+
+      [clearCart.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
       },

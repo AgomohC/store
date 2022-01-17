@@ -1,12 +1,5 @@
 import React from "react";
-import {
-   makeStyles,
-   Button,
-   Typography,
-   Grid,
-   withStyles,
-   IconButton,
-} from "@material-ui/core";
+import { makeStyles, Button, Typography, Grid } from "@material-ui/core";
 import { Add, Delete, Remove } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -52,6 +45,7 @@ const CartItem = ({ item }) => {
       quantity,
       product_id: { _id, image, price, title },
    } = item;
+
    return (
       <Grid
          container
