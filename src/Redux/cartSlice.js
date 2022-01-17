@@ -23,6 +23,24 @@ export const removeItemFromCart = createAsyncThunk(
       return data;
    }
 );
+export const incrementCartItem = createAsyncThunk(
+   "cart/incrementItem",
+   async (_id) => {
+      const { data } = await axios.patch(`/cart/increment`, {
+         product_id: _id,
+      });
+      return data;
+   }
+);
+export const decrementCartItem = createAsyncThunk(
+   "cart/removeItem",
+   async (_id) => {
+      const { data } = await axios.patch(`/cart/decrement`, {
+         product_id: _id,
+      });
+      return data;
+   }
+);
 
 export const cartSlice = createSlice({
    name: "cart",
@@ -100,6 +118,37 @@ export const cartSlice = createSlice({
       },
 
       [removeItemFromCart.rejected]: (state, action) => {
+         state.pending = false;
+         state.error = true;
+      },
+      [incrementCartItem.pending]: (state, action) => {
+         state.pending = true;
+         state.error = false;
+      },
+
+      [incrementCartItem.fulfilled]: (state, action) => {
+         state.pending = false;
+         state.error = false;
+         state.cartItems = action.payload.products;
+         state.cartLength = action.payload.count;
+      },
+
+      [incrementCartItem.rejected]: (state, action) => {
+         state.pending = false;
+         state.error = true;
+      },
+      [decrementCartItem.pending]: (state, action) => {
+         state.pending = true;
+         state.error = false;
+      },
+
+      [decrementCartItem.fulfilled]: (state, action) => {
+         state.pending = false;
+         state.error = false;
+         state.cartItems = action.payload.products;
+         state.cartLength = action.payload.count;
+      },
+      [decrementCartItem.rejected]: (state, action) => {
          state.pending = false;
          state.error = true;
       },
