@@ -6,30 +6,35 @@ import {
    Grid,
    withStyles,
    IconButton,
-   CardMedia,
 } from "@material-ui/core";
 import { Add, Delete, Remove } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
    container: {
       marginBottom: theme.spacing(3),
-      maxHeight: 320,
-      padding: theme.spacing(2),
+      maxHeight: 150,
+      paddingRight: theme.spacing(2),
+      // paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(2),
       backgroundColor: theme.palette.grey[100],
       borderRadius: theme.spacing(2),
       boxShadow: theme.shadows[2],
+      overflow: "hidden",
    },
    imgContainer: {
-      // height: "auto",
+      height: "100%",
       width: "100%",
-      maxHeight: 200,
    },
    img: {
-      height: 200,
+      height: "auto",
       width: "100%",
+      // transform: "Scale(0.55)",
    },
    dangerText: {
       color: theme.palette.error.main,
+   },
+   maxHeight: {
+      height: "100%",
    },
 }));
 
@@ -49,14 +54,16 @@ const CartItem = ({ item }) => {
          wrap="nowrap"
          className={classes.container}
       >
-         <Grid container item xs={10} justifyContent="space-between">
-            <Grid item xs={4}>
+         <Grid
+            container
+            item
+            xs={12}
+            justifyContent="space-between"
+            className={classes.maxHeight}
+         >
+            <Grid item xs={4} className={classes.maxHeight}>
                <div className={classes.imgContainer}>
-                  <CardMedia
-                     className={classes.img}
-                     image={image}
-                     alt={title}
-                  />
+                  <img className={classes.img} src={image} alt={title} />
                </div>
             </Grid>
             <Grid item container xs={7}>
