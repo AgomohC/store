@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(3),
       maxHeight: 150,
       paddingRight: theme.spacing(2),
-      // paddingTop: theme.spacing(2),
       paddingBottom: theme.spacing(2),
       backgroundColor: theme.palette.grey[100],
       borderRadius: theme.spacing(2),
@@ -28,13 +27,22 @@ const useStyles = makeStyles((theme) => ({
    img: {
       height: "auto",
       width: "100%",
-      // transform: "Scale(0.55)",
+   },
+   btnContainer: {
+      maxWidth: "30%",
+      height: "100%",
+   },
+   paddingTopTwo: {
+      paddingTop: theme.spacing(2),
    },
    dangerText: {
       color: theme.palette.error.main,
    },
    maxHeight: {
       height: "100%",
+   },
+   paleText: {
+      color: theme.palette.grey[600],
    },
 }));
 
@@ -66,7 +74,7 @@ const CartItem = ({ item }) => {
                   <img className={classes.img} src={image} alt={title} />
                </div>
             </Grid>
-            <Grid item container xs={7}>
+            <Grid item container xs={7} className={classes.paddingTopTwo}>
                <Grid
                   item
                   container
@@ -86,12 +94,31 @@ const CartItem = ({ item }) => {
                   alignItems="baseline"
                   justifyContent="space-between"
                >
-                  <Typography variant="subtitle2" color="initial">
+                  <Typography
+                     variant="subtitle2"
+                     color="initial"
+                     className={classes.paleText}
+                  >
                      {price} x {quantity}
                   </Typography>
                   <Typography variant="subtitle2" color="initial">
                      {Math.round(price * quantity * 100) / 100}
                   </Typography>
+                  <Grid
+                     item
+                     className={classes.btnContainer}
+                     container
+                     direction="row"
+                     alignItems="center"
+                  >
+                     <Button>
+                        <Remove className={classes.paleText} />
+                     </Button>
+                     <Typography variant="subtitle2">{quantity}</Typography>
+                     <Button>
+                        <Add className={classes.paleText} />
+                     </Button>
+                  </Grid>
                </Grid>
             </Grid>
          </Grid>
