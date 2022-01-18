@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
    },
    img: {
-      height: "auto",
+      height: "100%",
       width: "100%",
    },
    btnContainer: {

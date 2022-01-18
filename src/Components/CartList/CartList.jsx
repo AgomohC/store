@@ -8,6 +8,7 @@ import {
    CircularProgress,
    Typography,
    Button,
+   withStyles,
 } from "@material-ui/core";
 import classNames from "classnames";
 import { clearCart } from "../../Redux/cartSlice";
@@ -34,6 +35,12 @@ const useStyles = makeStyles((theme) => ({
    btnContainer: {
       marginTop: theme.spacing(2),
    },
+   navigateBtn: {
+      marginBottom: theme.spacing(4),
+   },
+   marginRightTwo: {
+      marginRight: theme.spacing(2),
+   },
 }));
 
 const mapThroughItems = (items) => {
@@ -41,6 +48,36 @@ const mapThroughItems = (items) => {
       return <CartItem key={idx} item={item} />;
    });
 };
+const DangerButton = withStyles((theme) => ({
+   root: {
+      borderColor: theme.palette.error.main,
+      backgroundColor: theme.palette.error.main,
+      color: theme.palette.common.white,
+      letterSpacing: 2,
+      transition: "0.3s all ease-in-out",
+      "&:hover": {
+         transform: "ScaleX(1.05)",
+         color: theme.palette.common.white,
+         borderColor: theme.palette.error.light,
+         backgroundColor: theme.palette.error.light,
+      },
+   },
+}))(Button);
+const SuccessButton = withStyles((theme) => ({
+   root: {
+      borderColor: theme.palette.success.main,
+      backgroundColor: theme.palette.success.main,
+      color: theme.palette.common.white,
+      letterSpacing: 2,
+      transition: "0.3s all ease-in-out",
+      "&:hover": {
+         transform: "ScaleX(1.05)",
+         color: theme.palette.common.white,
+         borderColor: theme.palette.success.light,
+         backgroundColor: theme.palette.success.light,
+      },
+   },
+}))(Button);
 
 const CartList = () => {
    const { cartItems, pending, cartLength } = useSelector(
@@ -51,28 +88,16 @@ const CartList = () => {
    const dispatch = useDispatch();
    return (
       <>
-         {cartLength === 0 && (
-            <Grid
-               className={classes.container}
-               direction="column"
-               alignItems="center"
-               container
-               item
-            >
-               <Typography variant="h4" color="initial">
-                  No Items in cart
-               </Typography>
-               <Button
-                  color="primary"
-                  onClick={() => navigate("/products")}
-                  variant="contained"
-               >
-                  Shop Now!!!
-               </Button>
-            </Grid>
-         )}
          {!pending && cartLength !== 0 ? (
             <Grid className={classes.container} container item xs={10} lg={8}>
+               <Button
+                  onClick={() => navigate("/products")}
+                  variant="contained"
+                  color="primary"
+                  className={classes.navigateBtn}
+               >
+                  Continue Shopping
+               </Button>
                {mapThroughItems(cartItems)}
                <Grid
                   item
@@ -91,26 +116,39 @@ const CartList = () => {
                   justifyContent="flex-end"
                   className={classes.btnContainer}
                >
-                  <Button
+                  <DangerButton
                      variant="contained"
                      onClick={() => dispatch(clearCart())}
+                     className={classes.marginRightTwo}
                   >
                      Clear Cart
-                  </Button>
-                  <Button
-                     onClick={() => navigate("/products")}
-                     variant="contained"
-                     color="primary"
-                  >
-                     Continue Shopping
-                  </Button>
-                  <Button
+                  </DangerButton>
+                  <SuccessButton
                      variant="contained"
                      onClick={() => navigate("/checkout")}
                   >
                      Checkout
-                  </Button>
+                  </SuccessButton>
                </Grid>
+            </Grid>
+         ) : !pending && cartLength === 0 ? (
+            <Grid
+               className={classes.container}
+               direction="column"
+               alignItems="center"
+               container
+               item
+            >
+               <Typography variant="h4" color="initial">
+                  No Items in cart
+               </Typography>
+               <Button
+                  color="primary"
+                  onClick={() => navigate("/products")}
+                  variant="contained"
+               >
+                  Shop Now!!!
+               </Button>
             </Grid>
          ) : (
             <Grid
