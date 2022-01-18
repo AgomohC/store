@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import classNames from "classnames";
-
+import { useNavigate } from "react-router-dom";
 const mapThroughItems = (items) => {
    return items.map((item, idx) => {
       return <SingleItem key={idx} item={item} />;
@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 const ItemList = () => {
    const classes = useStyles();
    const { pending, items } = useSelector((state) => state.app);
+   const navigate = useNavigate();
    return (
       <>
          {/* {items.length === 0 && (
@@ -51,7 +52,7 @@ const ItemList = () => {
                </Typography>
             </Grid>
          )} */}
-         {!pending ? (
+         {!pending && items.length > 0 ? (
             <Grid
                className={classes.container}
                container
@@ -61,6 +62,25 @@ const ItemList = () => {
                sm={8}
             >
                {mapThroughItems(items)}
+            </Grid>
+         ) : !pending && items.length === 0 ? (
+            <Grid
+               className={classes.container}
+               direction="column"
+               alignItems="center"
+               container
+               item
+            >
+               <Typography variant="h4" color="initial">
+                  No Items Found
+               </Typography>
+               <Button
+                  color="primary"
+                  onClick={() => navigate("/home")}
+                  variant="contained"
+               >
+                  Back to home
+               </Button>
             </Grid>
          ) : (
             <Grid

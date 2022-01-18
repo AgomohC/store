@@ -1,11 +1,5 @@
 import React from "react";
-import {
-   makeStyles,
-   Button,
-   Typography,
-   Grid,
-   IconButton,
-} from "@material-ui/core";
+import { makeStyles, Typography, Grid, IconButton } from "@material-ui/core";
 import { Add, Delete, Remove } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 import classNames from "classnames";
