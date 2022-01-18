@@ -1,13 +1,14 @@
 import React from "react";
 import { makeStyles, Typography, Grid, IconButton } from "@material-ui/core";
 import { Add, Delete, Remove } from "@material-ui/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 import {
    removeItemFromCart,
    incrementCartItem,
    decrementCartItem,
 } from "../../Redux/cartSlice";
+import { openSnackBar } from "../../Redux/appSlice";
 const useStyles = makeStyles((theme) => ({
    container: {
       marginBottom: theme.spacing(3),
@@ -75,12 +76,31 @@ const useStyles = makeStyles((theme) => ({
 
 const CartItem = ({ item }) => {
    const classes = useStyles();
+   const { error, pending } = useSelector((state) => state.cart);
    const {
       quantity,
       product_id: { _id, image, price, title },
    } = item;
    const dispatch = useDispatch();
 
+   const handleDelete = () => {
+      dispatch(removeItemFromCart(_id));
+      if (!error && !pending) {
+         dispatch(
+            openSnackBar({
+               severity: "success",
+               text: "Item has removed cart",
+            })
+         );
+      } else if (error && !pending) {
+         dispatch(
+            openSnackBar({
+               severity: "error",
+               text: "Something went wrong",
+            })
+         );
+      }
+   };
    return (
       <Grid
          container
@@ -121,7 +141,7 @@ const CartItem = ({ item }) => {
                      {title.substring(0, 30)}...
                   </Typography>
                   <Delete
-                     onClick={() => dispatch(removeItemFromCart(_id))}
+                     onClick={handleDelete}
                      className={classNames(classes.dangerText, classes.cursor)}
                   />
                </Grid>

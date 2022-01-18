@@ -63,7 +63,7 @@ const SingleProduct = () => {
                   text: "Item has been added to cart",
                })
             );
-         } else {
+         } else if (error && !pending) {
             dispatch(
                openSnackBar({
                   severity: "error",

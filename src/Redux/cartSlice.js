@@ -49,6 +49,7 @@ export const cartSlice = createSlice({
       cartLength: 0,
       error: false,
       pending: false,
+      total: 0,
    },
    reducers: {
       resetCart: (state) => {
@@ -56,6 +57,14 @@ export const cartSlice = createSlice({
          state.cartLength = 0;
          state.error = false;
          state.pending = false;
+         state.total = 0;
+      },
+      getTotal: (state) => {
+         state.total = state.cartItems.reduce((a, b) => {
+            return (
+               a + (b.quantity * Math.round(b.product_id.price * 100)) / 100
+            );
+         }, 0);
       },
    },
    extraReducers: {
@@ -83,6 +92,7 @@ export const cartSlice = createSlice({
          state.error = false;
          state.cartItems = action.payload.products;
          state.cartLength = action.payload.count;
+         state.total = 0;
       },
 
       [fetchCartItems.rejected]: (state, action) => {
@@ -149,6 +159,6 @@ export const cartSlice = createSlice({
    },
 });
 
-export const { resetCart } = cartSlice.actions;
+export const { resetCart, getTotal } = cartSlice.actions;
 
 export default cartSlice.reducer;

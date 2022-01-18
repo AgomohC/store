@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import CartItem from "../CartItem/CartItem";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,8 @@ import {
 } from "@material-ui/core";
 import classNames from "classnames";
 import { clearCart } from "../../Redux/cartSlice";
+import { openSnackBar } from "../../Redux/appSlice";
+import { getTotal } from "../../Redux/cartSlice";
 
 const useStyles = makeStyles((theme) => ({
    container: {
@@ -40,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
    },
    marginRightTwo: {
       marginRight: theme.spacing(2),
+   },
+   marginTopTwo: {
+      marginTop: theme.spacing(2),
    },
 }));
 
@@ -80,12 +85,41 @@ const SuccessButton = withStyles((theme) => ({
 }))(Button);
 
 const CartList = () => {
-   const { cartItems, pending, cartLength } = useSelector(
+   const { cartItems, pending, cartLength, error, total } = useSelector(
       (state) => state.cart
    );
    const classes = useStyles();
    const navigate = useNavigate();
    const dispatch = useDispatch();
+   const isMounted = useRef(false);
+
+   useEffect(() => {
+      if (isMounted.current && cartLength !== 0) {
+         dispatch(getTotal());
+      } else {
+         isMounted.current = true;
+      }
+   }, [dispatch, cartItems, cartLength]);
+
+   const handleClearCart = () => {
+      dispatch(clearCart());
+      if (!error && !pending) {
+         dispatch(
+            openSnackBar({
+               severity: "success",
+               text: "Cart has been cleared",
+            })
+         );
+      } else if (error && !pending) {
+         dispatch(
+            openSnackBar({
+               severity: "error",
+               text: "Something went wrong",
+            })
+         );
+      }
+   };
+
    return (
       <>
          {!pending && cartLength !== 0 ? (
@@ -106,8 +140,8 @@ const CartList = () => {
                   xs={12}
                   className={classes.priceDiv}
                >
-                  <Typography variant="h6" color="initial">
-                     Total:
+                  <Typography variant="body1" color="initial">
+                     Total: {total}
                   </Typography>
                </Grid>
                <Grid
@@ -118,7 +152,7 @@ const CartList = () => {
                >
                   <DangerButton
                      variant="contained"
-                     onClick={() => dispatch(clearCart())}
+                     onClick={handleClearCart}
                      className={classes.marginRightTwo}
                   >
                      Clear Cart
@@ -140,12 +174,13 @@ const CartList = () => {
                item
             >
                <Typography variant="h4" color="initial">
-                  No Items in cart
+                  Cart is empty
                </Typography>
                <Button
                   color="primary"
                   onClick={() => navigate("/products")}
                   variant="contained"
+                  className={classes.marginTopTwo}
                >
                   Shop Now!!!
                </Button>

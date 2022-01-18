@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
    progress: {
       padding: theme.spacing(10),
    },
+   marginTopTwo: {
+      marginTop: theme.spacing(2),
+   },
 }));
 
 const ItemList = () => {
@@ -62,6 +65,7 @@ const ItemList = () => {
                   color="primary"
                   onClick={() => navigate("/")}
                   variant="contained"
+                  className={classes.marginTopTwo}
                >
                   Back to home
                </Button>
