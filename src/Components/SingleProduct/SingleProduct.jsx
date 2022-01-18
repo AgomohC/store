@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SingleProduct = () => {
    const { singleItem } = useSelector((state) => state.app);
-   const { pending } = useSelector((state) => state.cart);
+   const { pending, error } = useSelector((state) => state.cart);
    const user = useSelector((state) => state.user.user);
 
    const classes = useStyles();
@@ -56,6 +56,21 @@ const SingleProduct = () => {
          dispatch(openSnackBar({ severity: "error", text: "Please Log In" }));
       } else {
          dispatch(addToCart(_id));
+         if (!error && !pending) {
+            dispatch(
+               openSnackBar({
+                  severity: "success",
+                  text: "Item has been added to cart",
+               })
+            );
+         } else {
+            dispatch(
+               openSnackBar({
+                  severity: "error",
+                  text: "Something went wrong",
+               })
+            );
+         }
       }
    };
 

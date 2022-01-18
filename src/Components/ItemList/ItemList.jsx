@@ -36,22 +36,6 @@ const ItemList = () => {
    const navigate = useNavigate();
    return (
       <>
-         {/* {items.length === 0 && (
-            <Grid
-               className={classes.container}
-               direction="column"
-               alignItems="center"
-               container
-               item
-               spacing={4}
-               xs={10}
-               sm={8}
-            >
-               <Typography variant="h4" color="initial">
-                  No Items Found
-               </Typography>
-            </Grid>
-         )} */}
          {!pending && items.length > 0 ? (
             <Grid
                className={classes.container}
@@ -76,7 +60,7 @@ const ItemList = () => {
                </Typography>
                <Button
                   color="primary"
-                  onClick={() => navigate("/home")}
+                  onClick={() => navigate("/")}
                   variant="contained"
                >
                   Back to home

@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import { logOut } from "../../Redux/userSlice";
 import { resetCart } from "../../Redux/cartSlice";
-import { resetApp } from "../../Redux/appSlice";
 
 const useStyles = makeStyles((theme) => ({
    container: {
@@ -49,7 +48,7 @@ const WarningButton = withStyles((theme) => ({
       transition: "0.3s all ease-in-out",
       paddingLeft: theme.spacing(6),
       "&:hover": {
-         transform: "ScaleX(1.05)",
+         transform: "Scale(1.05)",
          color: theme.palette.common.white,
          borderColor: theme.palette.error.main,
          backgroundColor: theme.palette.error.main,
@@ -67,7 +66,6 @@ const AccountInfo = () => {
 
    const handleLogout = () => {
       dispatch(logOut());
-      dispatch(resetApp());
       dispatch(resetCart());
    };
    return (

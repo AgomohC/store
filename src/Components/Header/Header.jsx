@@ -22,7 +22,6 @@ import { logOut } from "../../Redux/userSlice";
 import CloseIcon from "@material-ui/icons/Close";
 import { fetchCartItems } from "../../Redux/cartSlice";
 import { resetCart } from "../../Redux/cartSlice";
-import { resetApp } from "../../Redux/appSlice";
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -103,7 +102,7 @@ const useStyles = makeStyles((theme) => ({
    transition: {
       transition: "0.3s all ease-out",
       "&:hover": {
-         transform: "ScaleX(1.1)",
+         transform: "Scale(1.1)",
       },
    },
 }));
@@ -118,7 +117,6 @@ const Header = () => {
 
    const handleLogout = () => {
       dispatch(logOut());
-      dispatch(resetApp());
       dispatch(resetCart());
    };
 
@@ -159,6 +157,7 @@ const Header = () => {
                   className={classNames(classes.logo, classes.letterSpace)}
                   variant="h4"
                   component="h1"
+                  translate="no"
                >
                   <Link to="/" className={classes.link}>
                      Peculiar
