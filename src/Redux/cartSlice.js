@@ -19,7 +19,7 @@ export const clearCart = createAsyncThunk("cart/clearCart", async () => {
 export const removeItemFromCart = createAsyncThunk(
    "cart/removeItem",
    async (_id) => {
-      const { data } = await axios.delete(`/cart/delete`, { product_id: _id });
+      const { data } = await axios.delete(`/cart/delete/${_id}`);
       return data;
    }
 );

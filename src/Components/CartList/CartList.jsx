@@ -1,6 +1,6 @@
 import React from "react";
 import CartItem from "../CartItem/CartItem";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
    Grid,
@@ -10,6 +10,7 @@ import {
    Button,
 } from "@material-ui/core";
 import classNames from "classnames";
+import { clearCart } from "../../Redux/cartSlice";
 
 const useStyles = makeStyles((theme) => ({
    container: {
@@ -47,6 +48,7 @@ const CartList = () => {
    );
    const classes = useStyles();
    const navigate = useNavigate();
+   const dispatch = useDispatch();
    return (
       <>
          {cartLength === 0 && (
@@ -71,7 +73,7 @@ const CartList = () => {
                </Button>
             </Grid>
          )}
-         {!pending ? (
+         {!pending && cartLength !== 0 ? (
             <Grid className={classes.container} container item xs={10} sm={8}>
                {mapThroughItems(cartItems)}
                <Grid
@@ -91,7 +93,12 @@ const CartList = () => {
                   justifyContent="flex-end"
                   className={classes.btnContainer}
                >
-                  <Button variant="contained">Clear Cart</Button>
+                  <Button
+                     variant="contained"
+                     onClick={() => dispatch(clearCart())}
+                  >
+                     Clear Cart
+                  </Button>
                   <Button
                      onClick={() => navigate("/products")}
                      variant="contained"

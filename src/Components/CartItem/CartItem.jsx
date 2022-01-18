@@ -1,7 +1,13 @@
 import React from "react";
 import { makeStyles, Button, Typography, Grid } from "@material-ui/core";
 import { Add, Delete, Remove } from "@material-ui/icons";
-
+import { useDispatch } from "react-redux";
+import classNames from "classnames";
+import {
+   removeItemFromCart,
+   incrementCartItem,
+   decrementCartItem,
+} from "../../Redux/cartSlice";
 const useStyles = makeStyles((theme) => ({
    container: {
       marginBottom: theme.spacing(3),
@@ -37,6 +43,13 @@ const useStyles = makeStyles((theme) => ({
    paleText: {
       color: theme.palette.grey[600],
    },
+   cursor: {
+      cursor: "pointer",
+      transition: "0.3s all ease-in-out",
+      "&:hover": {
+         transform: "Scale(0.9)",
+      },
+   },
 }));
 
 const CartItem = ({ item }) => {
@@ -45,6 +58,7 @@ const CartItem = ({ item }) => {
       quantity,
       product_id: { _id, image, price, title },
    } = item;
+   const dispatch = useDispatch();
 
    return (
       <Grid
@@ -79,7 +93,10 @@ const CartItem = ({ item }) => {
                   <Typography variant="subtitle2" color="initial">
                      {title.substring(0, 30)}...
                   </Typography>
-                  <Delete className={classes.dangerText} />
+                  <Delete
+                     onClick={() => dispatch(removeItemFromCart(_id))}
+                     className={classNames(classes.dangerText, classes.cursor)}
+                  />
                </Grid>
                <Grid
                   item
@@ -105,11 +122,11 @@ const CartItem = ({ item }) => {
                      direction="row"
                      alignItems="center"
                   >
-                     <Button>
+                     <Button onClick={() => dispatch(decrementCartItem(_id))}>
                         <Remove className={classes.paleText} />
                      </Button>
                      <Typography variant="subtitle2">{quantity}</Typography>
-                     <Button>
+                     <Button onClick={() => dispatch(incrementCartItem(_id))}>
                         <Add className={classes.paleText} />
                      </Button>
                   </Grid>
