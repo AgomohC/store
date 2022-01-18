@@ -1,5 +1,11 @@
 import React from "react";
-import { makeStyles, Button, Typography, Grid } from "@material-ui/core";
+import {
+   makeStyles,
+   Button,
+   Typography,
+   Grid,
+   IconButton,
+} from "@material-ui/core";
 import { Add, Delete, Remove } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 import classNames from "classnames";
@@ -13,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(3),
       maxHeight: 150,
       paddingRight: theme.spacing(2),
-      paddingBottom: theme.spacing(2),
       backgroundColor: theme.palette.grey[100],
       borderRadius: theme.spacing(2),
       boxShadow: theme.shadows[2],
@@ -28,11 +33,27 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
    },
    btnContainer: {
-      maxWidth: "30%",
       height: "100%",
+      [theme.breakpoints.up("md")]: {
+         maxWidth: "30%",
+         height: "100%",
+      },
    },
-   paddingTopTwo: {
+   info: {
       paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(2),
+   },
+   infoTitle: {
+      marginLeft: theme.spacing(2),
+      [theme.breakpoints.up("sm")]: {
+         marginLeft: theme.spacing(2),
+      },
+   },
+   infoPrice: {
+      marginTop: theme.spacing(2),
+      [theme.breakpoints.up("sm")]: {
+         marginTop: theme.spacing(4),
+      },
    },
    dangerText: {
       color: theme.palette.error.main,
@@ -48,6 +69,12 @@ const useStyles = makeStyles((theme) => ({
       transition: "0.3s all ease-in-out",
       "&:hover": {
          transform: "Scale(0.9)",
+      },
+   },
+   hideMobile: {
+      display: "none",
+      [theme.breakpoints.up("sm")]: {
+         display: "flex",
       },
    },
 }));
@@ -77,20 +104,26 @@ const CartItem = ({ item }) => {
             justifyContent="space-between"
             className={classes.maxHeight}
          >
-            <Grid item xs={4} className={classes.maxHeight}>
+            <Grid
+               item
+               sm={3}
+               md={4}
+               className={classNames(classes.hideMobile, classes.maxHeight)}
+            >
                <div className={classes.imgContainer}>
                   <img className={classes.img} src={image} alt={title} />
                </div>
             </Grid>
-            <Grid item container xs={7} className={classes.paddingTopTwo}>
+            <Grid item container xs={12} sm={9} md={8} className={classes.info}>
                <Grid
                   item
                   container
                   direction="row"
                   alignItems="flex-start"
                   justifyContent="space-between"
+                  className={classes.infoTitle}
                >
-                  <Typography variant="subtitle2" color="initial">
+                  <Typography variant="body2" color="initial">
                      {title.substring(0, 30)}...
                   </Typography>
                   <Delete
@@ -102,33 +135,49 @@ const CartItem = ({ item }) => {
                   item
                   container
                   direction="row"
-                  alignItems="baseline"
-                  justifyContent="space-between"
+                  alignItems="center"
+                  justifyContent="space-around"
+                  wrap="wrap"
+                  className={classes.infoPrice}
                >
-                  <Typography
-                     variant="subtitle2"
-                     color="initial"
-                     className={classes.paleText}
+                  <Grid
+                     container
+                     direction="row"
+                     item
+                     xs={8}
+                     justifyContent="space-around"
                   >
-                     {price} x {quantity}
-                  </Typography>
-                  <Typography variant="subtitle2" color="initial">
-                     {Math.round(price * quantity * 100) / 100}
-                  </Typography>
+                     <Typography
+                        variant="subtitle2"
+                        color="initial"
+                        className={classes.paleText}
+                     >
+                        {price} x {quantity}
+                     </Typography>
+                     <Typography variant="subtitle2" color="initial">
+                        {Math.round(price * quantity * 100) / 100}
+                     </Typography>
+                  </Grid>
                   <Grid
                      item
                      className={classes.btnContainer}
                      container
                      direction="row"
+                     wrap="nowrap"
                      alignItems="center"
+                     xs={4}
                   >
-                     <Button onClick={() => dispatch(decrementCartItem(_id))}>
+                     <IconButton
+                        onClick={() => dispatch(decrementCartItem(_id))}
+                     >
                         <Remove className={classes.paleText} />
-                     </Button>
+                     </IconButton>
                      <Typography variant="subtitle2">{quantity}</Typography>
-                     <Button onClick={() => dispatch(incrementCartItem(_id))}>
+                     <IconButton
+                        onClick={() => dispatch(incrementCartItem(_id))}
+                     >
                         <Add className={classes.paleText} />
-                     </Button>
+                     </IconButton>
                   </Grid>
                </Grid>
             </Grid>

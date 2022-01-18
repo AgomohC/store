@@ -122,34 +122,28 @@ export const cartSlice = createSlice({
          state.error = true;
       },
       [incrementCartItem.pending]: (state, action) => {
-         state.pending = true;
          state.error = false;
       },
 
       [incrementCartItem.fulfilled]: (state, action) => {
-         state.pending = false;
          state.error = false;
          state.cartItems = action.payload.products;
          state.cartLength = action.payload.count;
       },
 
       [incrementCartItem.rejected]: (state, action) => {
-         state.pending = false;
          state.error = true;
       },
       [decrementCartItem.pending]: (state, action) => {
-         state.pending = true;
          state.error = false;
       },
 
       [decrementCartItem.fulfilled]: (state, action) => {
-         state.pending = false;
          state.error = false;
          state.cartItems = action.payload.products;
          state.cartLength = action.payload.count;
       },
       [decrementCartItem.rejected]: (state, action) => {
-         state.pending = false;
          state.error = true;
       },
    },

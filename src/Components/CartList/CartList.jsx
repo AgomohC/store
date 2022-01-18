@@ -58,8 +58,6 @@ const CartList = () => {
                alignItems="center"
                container
                item
-               xs={10}
-               sm={8}
             >
                <Typography variant="h4" color="initial">
                   No Items in cart
@@ -74,7 +72,7 @@ const CartList = () => {
             </Grid>
          )}
          {!pending && cartLength !== 0 ? (
-            <Grid className={classes.container} container item xs={10} sm={8}>
+            <Grid className={classes.container} container item xs={10} lg={8}>
                {mapThroughItems(cartItems)}
                <Grid
                   item
