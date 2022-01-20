@@ -18,9 +18,10 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: theme.spacing(2),
       boxShadow: theme.shadows[2],
       overflow: "hidden",
+      transition: "0.3s all ease-in-out",
    },
    imgContainer: {
-      height: "100%",
+      height: "auto",
       width: "100%",
    },
    img: {
