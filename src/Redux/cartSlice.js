@@ -75,7 +75,11 @@ export const cartSlice = createSlice({
       [addToCart.fulfilled]: (state, action) => {
          state.pending = false;
          state.error = false;
-         state.cartItems = action.payload.products;
+         let { products } = action.payload;
+         products = products.sort((a, b) => {
+            return new Date(b.created_at) - new Date(a.created_at);
+         });
+         state.cartItems = products;
          state.cartLength = action.payload.count;
       },
       [addToCart.rejected]: (state, action) => {
@@ -90,7 +94,11 @@ export const cartSlice = createSlice({
       [fetchCartItems.fulfilled]: (state, action) => {
          state.pending = false;
          state.error = false;
-         state.cartItems = action.payload.products;
+         let { products } = action.payload;
+         products = products.sort((a, b) => {
+            return new Date(b.created_at) - new Date(a.created_at);
+         });
+         state.cartItems = products;
          state.cartLength = action.payload.count;
          state.total = 0;
       },
@@ -123,7 +131,11 @@ export const cartSlice = createSlice({
       [removeItemFromCart.fulfilled]: (state, action) => {
          state.pending = false;
          state.error = false;
-         state.cartItems = action.payload.products;
+         let { products } = action.payload;
+         products = products.sort((a, b) => {
+            return new Date(b.created_at) - new Date(a.created_at);
+         });
+         state.cartItems = products;
          state.cartLength = action.payload.count;
       },
 
@@ -137,7 +149,11 @@ export const cartSlice = createSlice({
 
       [incrementCartItem.fulfilled]: (state, action) => {
          state.error = false;
-         state.cartItems = action.payload.products;
+         let { products } = action.payload;
+         products = products.sort((a, b) => {
+            return new Date(b.created_at) - new Date(a.created_at);
+         });
+         state.cartItems = products;
          state.cartLength = action.payload.count;
       },
 
@@ -150,7 +166,11 @@ export const cartSlice = createSlice({
 
       [decrementCartItem.fulfilled]: (state, action) => {
          state.error = false;
-         state.cartItems = action.payload.products;
+         let { products } = action.payload;
+         products = products.sort((a, b) => {
+            return new Date(b.created_at) - new Date(a.created_at);
+         });
+         state.cartItems = products;
          state.cartLength = action.payload.count;
       },
       [decrementCartItem.rejected]: (state, action) => {
