@@ -4,9 +4,8 @@ import {
    Card,
    CardMedia,
    Grid,
-   CardActions,
-   Button,
    Typography,
+   CardActionArea,
    CardContent,
 } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
@@ -24,9 +23,6 @@ const useStyles = makeStyles((theme) => ({
          height: 200,
       },
    },
-   letterSpace: {
-      letterSpacing: 3,
-   },
 }));
 
 const SingleItem = ({ item }) => {
@@ -36,33 +32,27 @@ const SingleItem = ({ item }) => {
    return (
       <Grid item xs={12} sm={6} lg={3}>
          <Card className={classes.root}>
-            <CardMedia
-               className={classes.media}
-               src={image}
-               title={title}
-               component="img"
-               loading="lazy"
-            />
-            <CardContent>
-               <Typography gutterBottom variant="body1" component="h4">
-                  {title.substring(0, 20)}...
-               </Typography>
-               <Typography variant="body2" color="textSecondary" component="p">
-                  ${price}
-               </Typography>
-            </CardContent>
-
-            <CardActions>
-               <Button
-                  size="small"
-                  variant="contained"
-                  color="primary"
-                  onClick={() => navigate(`/products/${_id}`)}
-                  className={classes.letterSpace}
-               >
-                  Learn More
-               </Button>
-            </CardActions>
+            <CardActionArea onClick={() => navigate(`/products/${_id}`)}>
+               <CardMedia
+                  className={classes.media}
+                  src={image}
+                  title={title}
+                  component="img"
+                  loading="lazy"
+               />
+               <CardContent>
+                  <Typography gutterBottom variant="body1" component="h4">
+                     {title.substring(0, 20)}...
+                  </Typography>
+                  <Typography
+                     variant="body2"
+                     color="textSecondary"
+                     component="p"
+                  >
+                     ${price}
+                  </Typography>
+               </CardContent>
+            </CardActionArea>
          </Card>
       </Grid>
    );
