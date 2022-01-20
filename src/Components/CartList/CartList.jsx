@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
    marginTopTwo: {
       marginTop: theme.spacing(2),
    },
+   letterSpace: {
+      letterSpacing: 3,
+   },
 }));
 
 const mapThroughItems = (items) => {
@@ -128,7 +131,10 @@ const CartList = () => {
                   onClick={() => navigate("/products")}
                   variant="contained"
                   color="primary"
-                  className={classes.navigateBtn}
+                  className={classNames(
+                     classes.letterSpace,
+                     classes.navigateBtn
+                  )}
                >
                   Continue Shopping
                </Button>
@@ -180,7 +186,10 @@ const CartList = () => {
                   color="primary"
                   onClick={() => navigate("/products")}
                   variant="contained"
-                  className={classes.marginTopTwo}
+                  className={classNames(
+                     classes.letterSpace,
+                     classes.marginTopTwo
+                  )}
                >
                   Shop Now!!!
                </Button>
