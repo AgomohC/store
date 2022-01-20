@@ -122,7 +122,6 @@ const CartItem = ({ item }) => {
             <Grid
                item
                sm={3}
-               md={2}
                className={classNames(classes.hideMobile, classes.maxHeight)}
             >
                <div className={classes.imgContainer}>

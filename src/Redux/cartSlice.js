@@ -62,7 +62,12 @@ export const cartSlice = createSlice({
       getTotal: (state) => {
          state.total = state.cartItems.reduce((a, b) => {
             return (
-               a + (b.quantity * Math.round(b.product_id.price * 100)) / 100
+               Math.round(
+                  (a +
+                     (b.quantity * Math.round(b.product_id.price * 100)) /
+                        100) *
+                     100
+               ) / 100
             );
          }, 0);
       },
