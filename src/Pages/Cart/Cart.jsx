@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { CartList } from "../../Components";
+import { CartList, ScrollBtn } from "../../Components";
 import { useDispatch } from "react-redux";
 import { fetchCartItems } from "../../Redux/cartSlice";
 const Cart = () => {
@@ -11,6 +11,7 @@ const Cart = () => {
    return (
       <>
          <CartList />
+         <ScrollBtn />
       </>
    );
 };
