@@ -50,8 +50,8 @@ export const checkout = createAsyncThunk("cart/checkout", async (formData) => {
       phoneNumber,
       amount,
    });
-   console.log(data);
-   return;
+
+   return data;
 });
 
 export const cartSlice = createSlice({
@@ -62,6 +62,7 @@ export const cartSlice = createSlice({
       error: false,
       pending: false,
       total: 0,
+      url: "",
    },
    reducers: {
       resetCart: (state) => {
@@ -190,6 +191,19 @@ export const cartSlice = createSlice({
          state.cartLength = action.payload.count;
       },
       [decrementCartItem.rejected]: (state, action) => {
+         state.error = true;
+      },
+      [checkout.pending]: (state) => {
+         state.pending = true;
+         state.error = false;
+      },
+      [checkout.fulfilled]: (state, action) => {
+         state.pending = false;
+         state.error = false;
+         state.url = action.payload.url;
+      },
+      [checkout.rejected]: (state) => {
+         state.pending = false;
          state.error = true;
       },
    },

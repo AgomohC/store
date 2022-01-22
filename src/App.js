@@ -1,5 +1,11 @@
 import React from "react";
-import { Footer, Header, PrivateRoute, CustomSnackbar } from "./Components";
+import {
+   Footer,
+   Header,
+   PrivateRoute,
+   CustomSnackbar,
+   Redirect,
+} from "./Components";
 import {
    Account,
    Cart,
@@ -10,9 +16,11 @@ import {
    SignUp,
    SingleProductPage,
 } from "./Pages";
-
+import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+
 const App = () => {
+   const { url } = useSelector((state) => state.cart);
    return (
       <>
          <CustomSnackbar />
@@ -56,16 +64,21 @@ const App = () => {
                   </PrivateRoute>
                }
             />
-            <Route
-               path="/checkout"
-               element={
-                  <PrivateRoute>
-                     <Header />
-                     <Checkout />
-                     <Footer />
-                  </PrivateRoute>
-               }
-            />
+            {url === "" ? (
+               <Route
+                  path="/checkout"
+                  element={
+                     <PrivateRoute>
+                        <Header />
+                        <Checkout />
+                        <Footer />
+                     </PrivateRoute>
+                  }
+               />
+            ) : (
+               <Route path="/checkout" element={<Redirect url={url} />} />
+            )}
+
             <Route
                path="/products/:id"
                element={

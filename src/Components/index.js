@@ -11,7 +11,7 @@ import OrderSummary from "./OrderSummary/OrderSummary";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import SingleProduct from "./SingleProduct/SingleProduct";
 import CustomSnackbar from "./Snackbar/Snackbar";
-
+import Redirect from "./Redirect/Redirect";
 export {
    AccountInfo,
    CartList,
@@ -26,4 +26,5 @@ export {
    PrivateRoute,
    SingleProduct,
    CustomSnackbar,
+   Redirect,
 };

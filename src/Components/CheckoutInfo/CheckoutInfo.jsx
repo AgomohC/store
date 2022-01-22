@@ -66,8 +66,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 const CheckoutInfo = () => {
    const classes = useStyles();
-   const { pending } = useSelector((state) => state.user);
-   const { total } = useSelector((state) => state.cart);
+
+   const { total, pending } = useSelector((state) => state.cart);
    const dispatch = useDispatch();
 
    const handleSubmit = (event) => {

@@ -22,10 +22,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Checkout = () => {
    const classes = useStyles();
-
    const dispatch = useDispatch();
    const { pending } = useSelector((state) => state.cart);
-
    useEffect(() => {
       if (!pending) {
          dispatch(getTotal());
