@@ -86,7 +86,7 @@ const CheckoutInfo = () => {
             item
             direction="column"
             xs={12}
-            sm={6}
+            md={6}
          >
             <Typography component="h1" variant="h4">
                Checkout
