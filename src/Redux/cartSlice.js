@@ -42,6 +42,16 @@ export const decrementCartItem = createAsyncThunk(
    }
 );
 
+export const checkout = createAsyncThunk("cart/checkout", async (formData) => {
+   const { email, name, phoneNumber, amount } = formData;
+   const { data } = await axios.post("/cart/checkout", {
+      email,
+      name,
+      phoneNumber,
+      amount,
+   });
+});
+
 export const cartSlice = createSlice({
    name: "cart",
    initialState: {

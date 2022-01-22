@@ -12,6 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { checkout } from "../../Redux/cartSlice";
 
 const useStyles = makeStyles((theme) => ({
    formContainer: {
@@ -21,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.grey[100],
       padding: theme.spacing(3),
       margin: theme.spacing(3),
-
       borderRadius: theme.spacing(2),
       boxShadow: theme.shadows[2],
    },
@@ -67,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
 const CheckoutInfo = () => {
    const classes = useStyles();
    const { pending } = useSelector((state) => state.user);
+   const { total } = useSelector((state) => state.cart);
    const dispatch = useDispatch();
 
    const handleSubmit = (event) => {
@@ -75,7 +76,7 @@ const CheckoutInfo = () => {
       const email = data.get("email");
       const name = data.get("name");
       const phoneNumber = data.get("phoneNumber");
-      // dispatch(loginUser({ username, password }));
+      dispatch(checkout({ email, name, phoneNumber, amount: total }));
    };
 
    return (
