@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CheckoutInfo, OrderSummary } from "../../Components";
 import { Grid, makeStyles } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+import { getTotal } from "../../Redux/cartSlice";
 
 const useStyles = makeStyles((theme) => ({
    container: {
@@ -20,6 +22,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Checkout = () => {
    const classes = useStyles();
+
+   const dispatch = useDispatch();
+   const { pending } = useSelector((state) => state.cart);
+
+   useEffect(() => {
+      if (!pending) {
+         dispatch(getTotal());
+      }
+   }, [pending, dispatch]);
    return (
       <Grid container className={classes.container}>
          <OrderSummary />

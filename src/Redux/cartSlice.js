@@ -50,6 +50,8 @@ export const checkout = createAsyncThunk("cart/checkout", async (formData) => {
       phoneNumber,
       amount,
    });
+   console.log(data);
+   return;
 });
 
 export const cartSlice = createSlice({
@@ -115,7 +117,6 @@ export const cartSlice = createSlice({
          });
          state.cartItems = products;
          state.cartLength = action.payload.count;
-         state.total = 0;
       },
 
       [fetchCartItems.rejected]: (state, action) => {

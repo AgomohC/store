@@ -9,8 +9,8 @@ import {
    TextField,
 } from "@material-ui/core";
 
-import { Link } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+// import { Link } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { checkout } from "../../Redux/cartSlice";
 
@@ -84,6 +84,7 @@ const CheckoutInfo = () => {
          <Grid
             className={classNames(classes.letterSpace, classes.formContainer)}
             item
+            container
             direction="column"
             xs={12}
             md={6}
