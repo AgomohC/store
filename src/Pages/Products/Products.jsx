@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Input, ItemList, Categories } from "../../Components";
+import { Input, ItemList, Categories, ScrollBtn } from "../../Components";
 import { useDispatch } from "react-redux";
 import { getCategories, getItems } from "../../Redux/appSlice";
 
@@ -15,6 +15,7 @@ const Products = () => {
          <Input />
          <Categories />
          <ItemList />
+         <ScrollBtn />
       </>
    );
 };

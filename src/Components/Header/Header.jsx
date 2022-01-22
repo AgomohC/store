@@ -127,7 +127,7 @@ const Header = () => {
    return (
       <>
          <AppBar position="static" color="primary">
-            <Toolbar className={classes.root}>
+            <Toolbar className={classes.root} id="back-to-top-anchor">
                {isMenuOpen ? (
                   <IconButton
                      onClick={() => dispatch(closeMenu())}

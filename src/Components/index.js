@@ -12,6 +12,7 @@ import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import SingleProduct from "./SingleProduct/SingleProduct";
 import CustomSnackbar from "./Snackbar/Snackbar";
 import Redirect from "./Redirect/Redirect";
+import ScrollBtn from "./ScrollToTop/ScrollBtn";
 export {
    AccountInfo,
    CartList,
@@ -27,4 +28,5 @@ export {
    SingleProduct,
    CustomSnackbar,
    Redirect,
+   ScrollBtn,
 };
