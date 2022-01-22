@@ -56,6 +56,8 @@ const useStyles = makeStyles((theme) => ({
    },
    maxHeight: {
       height: "100%",
+      display: "flex",
+      alignItems: "center",
    },
    paleText: {
       color: theme.palette.grey[600],
@@ -73,6 +75,10 @@ const useStyles = makeStyles((theme) => ({
          display: "flex",
       },
    },
+   // flex: {
+   //    display: "flex",
+   //    alignItems: "center",
+   // },
 }));
 
 const CartItem = ({ item }) => {
@@ -122,7 +128,11 @@ const CartItem = ({ item }) => {
             <Grid
                item
                sm={3}
-               className={classNames(classes.hideMobile, classes.maxHeight)}
+               className={classNames(
+                  classes.hideMobile,
+                  classes.maxHeight,
+                  classes.flex
+               )}
             >
                <div className={classes.imgContainer}>
                   <img className={classes.img} src={image} alt={title} />
