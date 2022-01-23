@@ -175,7 +175,7 @@ const OrderSummary = () => {
             );
          })}
          <Typography component="h6" variant="body1">
-            Total: NGN {total}
+            Total: $ {total}
          </Typography>
       </Grid>
    );

@@ -8,7 +8,7 @@ import {
    Box,
    TextField,
 } from "@material-ui/core";
-import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { placeOrder, verifyPayment, clearCart } from "../../Redux/cartSlice";
 import { openSnackBar } from "../../Redux/appSlice";
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Shipping = () => {
    const classes = useStyles();
-   const [searchParams, setSearchParams] = useSearchParams();
+   const [searchParams] = useSearchParams();
    const reference = searchParams.get("reference");
    const { error, pending } = useSelector((state) => state.cart);
    const navigate = useNavigate();
