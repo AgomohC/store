@@ -126,7 +126,7 @@ const Login = () => {
                      classes.centerMargin
                   )}
                >
-                  <LockOutlinedIcon data-testid="icon" />
+                  <LockOutlinedIcon />
                </span>
 
                <Typography component="h1" variant="h4">
@@ -137,7 +137,6 @@ const Login = () => {
                   component="form"
                   className={classes.marginTopTwo}
                   onSubmit={handleSubmit}
-                  data-testid="form"
                >
                   <TextField
                      required
@@ -148,7 +147,6 @@ const Login = () => {
                      label="Username"
                      name="username"
                      autoFocus
-                     data-testid="username"
                   />
                   <TextField
                      required
@@ -158,7 +156,6 @@ const Login = () => {
                      label="Password"
                      type="password"
                      id="password"
-                     data-testid="password"
                   />
 
                   <Button
@@ -167,7 +164,6 @@ const Login = () => {
                      variant="contained"
                      color="primary"
                      className={classes.marginTopThree}
-                     data-testid="submit-btn"
                      disabled={pending}
                   >
                      <Typography
@@ -183,11 +179,7 @@ const Login = () => {
                      className={classNames(classes.text, classes.marginTopTwo)}
                   >
                      Don't have an account?
-                     <Link
-                        to="/register"
-                        className={classes.link}
-                        data-testid="register-link"
-                     >
+                     <Link to="/register" className={classes.link}>
                         Sign Up
                      </Link>
                   </Typography>

@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
    },
    formContainer: {
       minHeight: 320,
-      maxHeight: "95vh",
       minWidth: 320,
       maxWidth: 444,
       backgroundColor: theme.palette.grey[100],
@@ -148,7 +147,7 @@ const SignUp = () => {
                      classes.centerMargin
                   )}
                >
-                  <LockOutlinedIcon data-testid="icon" />
+                  <LockOutlinedIcon />
                </span>
 
                <Typography component="h1" variant="h4">
@@ -159,7 +158,6 @@ const SignUp = () => {
                   component="form"
                   className={classes.marginTopTwo}
                   onSubmit={handleSubmit}
-                  data-testid="form"
                >
                   <Grid spacing={2} container className={classes.flex}>
                      <Grid item xs={12} sm={6}>
@@ -170,7 +168,6 @@ const SignUp = () => {
                            id="lastName"
                            label="Last Name"
                            name="lastName"
-                           data-testid="lastName"
                         />
                      </Grid>
                      <Grid item xs={12} sm={6}>
@@ -181,7 +178,6 @@ const SignUp = () => {
                            label="First Name"
                            type="text"
                            id="firstName"
-                           data-testid="firstName"
                         />
                      </Grid>
                   </Grid>
@@ -193,7 +189,6 @@ const SignUp = () => {
                      label="Username"
                      type="text"
                      id="username"
-                     data-testid="username"
                   />
                   <TextField
                      required
@@ -203,7 +198,6 @@ const SignUp = () => {
                      label="Email"
                      type="email"
                      id="email"
-                     data-testid="email"
                   />
                   <TextField
                      required
@@ -213,7 +207,6 @@ const SignUp = () => {
                      label="Password"
                      type="password"
                      id="password"
-                     data-testid="password"
                   />
                   <TextField
                      required
@@ -223,7 +216,6 @@ const SignUp = () => {
                      label="Confirm Password"
                      type="password"
                      id="confirmPassword"
-                     data-testid="confirmPassword"
                   />
 
                   <Button
@@ -232,7 +224,6 @@ const SignUp = () => {
                      variant="contained"
                      color="primary"
                      className={classes.marginTopFour}
-                     data-testid="submit-btn"
                      disabled={pending}
                   >
                      <Typography
