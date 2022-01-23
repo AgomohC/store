@@ -15,6 +15,7 @@ import {
    Products,
    SignUp,
    SingleProductPage,
+   Shipping,
 } from "./Pages";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
@@ -91,6 +92,16 @@ const App = () => {
             />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<SignUp />} />
+            <Route
+               path="/shipping"
+               element={
+                  <PrivateRoute>
+                     <Header />
+                     <Shipping />
+                     <Footer />
+                  </PrivateRoute>
+               }
+            />
          </Routes>
       </>
    );

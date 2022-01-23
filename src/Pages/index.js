@@ -6,6 +6,7 @@ import Login from "./Login/Login";
 import Products from "./Products/Products";
 import SignUp from "./SignUp/SignUp";
 import SingleProductPage from "./SingleProductPage/SingleProductPage";
+import Shipping from "./Shipping/Shipping";
 
 export {
    Account,
@@ -16,4 +17,5 @@ export {
    Products,
    SignUp,
    SingleProductPage,
+   Shipping,
 };

@@ -13,6 +13,7 @@ import SingleProduct from "./SingleProduct/SingleProduct";
 import CustomSnackbar from "./Snackbar/Snackbar";
 import Redirect from "./Redirect/Redirect";
 import ScrollBtn from "./ScrollToTop/ScrollBtn";
+
 export {
    AccountInfo,
    CartList,

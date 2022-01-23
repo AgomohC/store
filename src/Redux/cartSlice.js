@@ -50,9 +50,20 @@ export const checkout = createAsyncThunk("cart/checkout", async (formData) => {
       phoneNumber,
       amount,
    });
-
    return data;
 });
+
+export const verifyPayment = createAsyncThunk(
+   "cart/verify",
+   async (reference) => {
+      const { data } = await axios.get(
+         `/cart/paystack/checkout?reference=${reference}`
+      );
+      console.log(data);
+      return;
+   }
+);
+export const placeOrder = createAsyncThunk("cart/placeOrder", async () => {});
 
 export const cartSlice = createSlice({
    name: "cart",

@@ -76,12 +76,12 @@ const SingleProduct = () => {
 
    return (
       <Grid container className={classes.container}>
-         <Grid item xs={10} sm={4}>
+         <Grid item xs={10} sm={4} lg={4}>
             <div className={classes.imgContainer}>
                <img src={image} alt={title} className={classes.img} />
             </div>
          </Grid>
-         <Grid item xs={10} sm={6} lgs={4}>
+         <Grid item xs={10} sm={6}>
             <Typography className={classes.marginTopTwo} variant="h4">
                {title}
             </Typography>
