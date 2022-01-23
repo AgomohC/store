@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
    },
    formContainer: {
       minHeight: 320,
+      maxHeight: "95vh",
       minWidth: 320,
       maxWidth: 444,
       backgroundColor: theme.palette.grey[100],
@@ -121,7 +122,7 @@ const SignUp = () => {
    }, [errorMessage, error, dispatch]);
    return (
       <>
-         {user && <Navigate to="/account" />};
+         {user && <Navigate to="/account" />}
          <Grid
             container
             className={classNames(
