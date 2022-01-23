@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
    progress: {
       padding: theme.spacing(7),
    },
+   font: {
+      marginLeft: theme.spacing(2),
+   },
 }));
 
 const Redirect = ({ url }) => {
@@ -34,7 +37,7 @@ const Redirect = ({ url }) => {
          className={classNames(classes.progress, classes.container)}
       >
          <CircularProgress size="5rem" />
-         <Typography variant="h6" color="initial">
+         <Typography variant="body2" className={classes.font} color="initial">
             Redirecting...
          </Typography>
       </Grid>

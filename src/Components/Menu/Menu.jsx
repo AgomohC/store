@@ -59,7 +59,20 @@ const Menu = () => {
          <Grid item container direction="column" className={classes.navLinks}>
             <Grid>
                <Typography
-                  variant="h6"
+                  variant="body1"
+                  color="inherit"
+                  className={classes.linkText}
+               >
+                  <Link
+                     to="/"
+                     onClick={() => dispatch(closeMenu())}
+                     className={classes.link}
+                  >
+                     Home
+                  </Link>
+               </Typography>
+               <Typography
+                  variant="body1"
                   color="inherit"
                   className={classes.linkText}
                >
@@ -72,7 +85,7 @@ const Menu = () => {
                   </Link>
                </Typography>
                <Typography
-                  variant="h6"
+                  variant="body1"
                   color="inherit"
                   className={classes.linkText}
                >

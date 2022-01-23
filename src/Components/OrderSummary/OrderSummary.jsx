@@ -77,10 +77,10 @@ const useStyles = makeStyles((theme) => ({
 
 const OrderSummary = () => {
    const classes = useStyles();
-   const { cartItems } = useSelector((state) => state.cart);
+   const { cartItems, total } = useSelector((state) => state.cart);
    return (
       <Grid container item xs={12} md={6} className={classes.container}>
-         <Typography component="h1" variant="h5">
+         <Typography component="h2" variant="h5">
             Order Summary
          </Typography>
          {cartItems.map((item) => {
@@ -174,6 +174,9 @@ const OrderSummary = () => {
                </Grid>
             );
          })}
+         <Typography component="h6" variant="body1">
+            Total: NGN {total}
+         </Typography>
       </Grid>
    );
 };
