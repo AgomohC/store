@@ -56,14 +56,24 @@ export const checkout = createAsyncThunk("cart/checkout", async (formData) => {
 export const verifyPayment = createAsyncThunk(
    "cart/verify",
    async (reference) => {
-      const { data } = await axios.get(
-         `/cart/paystack/checkout?reference=${reference}`
-      );
-      console.log(data);
+      await axios.get(`/cart/paystack/checkout?reference=${reference}`);
+
       return;
    }
 );
-export const placeOrder = createAsyncThunk("cart/placeOrder", async () => {});
+export const placeOrder = createAsyncThunk(
+   "cart/placeOrder",
+   async ({ address, city, postalCode, country }) => {
+      await axios.post(`/cart/checkout/shipping`, {
+         address,
+         city,
+         postalCode,
+         country,
+      });
+
+      return;
+   }
+);
 
 export const cartSlice = createSlice({
    name: "cart",
@@ -214,6 +224,30 @@ export const cartSlice = createSlice({
          state.url = action.payload.url;
       },
       [checkout.rejected]: (state) => {
+         state.pending = false;
+         state.error = true;
+      },
+      [verifyPayment.pending]: (state) => {
+         state.pending = true;
+         state.error = false;
+      },
+      [verifyPayment.fulfilled]: (state, action) => {
+         state.pending = false;
+         state.error = false;
+      },
+      [verifyPayment.rejected]: (state) => {
+         state.pending = false;
+         state.error = true;
+      },
+      [placeOrder.pending]: (state) => {
+         state.pending = true;
+         state.error = false;
+      },
+      [placeOrder.fulfilled]: (state, action) => {
+         state.pending = false;
+         state.error = false;
+      },
+      [placeOrder.rejected]: (state) => {
          state.pending = false;
          state.error = true;
       },

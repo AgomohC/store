@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import classNames from "classnames";
 import {
    makeStyles,
@@ -8,9 +8,9 @@ import {
    Box,
    TextField,
 } from "@material-ui/core";
-import { Navigate, useSearchParams } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { placeOrder } from "../../Redux/cartSlice";
+import { placeOrder, verifyPayment, clearCart } from "../../Redux/cartSlice";
 import { openSnackBar } from "../../Redux/appSlice";
 
 const useStyles = makeStyles((theme) => ({
@@ -63,20 +63,22 @@ const Shipping = () => {
    const classes = useStyles();
    const [searchParams, setSearchParams] = useSearchParams();
    const reference = searchParams.get("reference");
-   console.log(reference);
+   const { error, pending } = useSelector((state) => state.cart);
+   const navigate = useNavigate();
+
    const dispatch = useDispatch();
 
-   const isMounted = useRef(false);
+   useEffect(() => {
+      dispatch(verifyPayment(reference));
+   }, [dispatch, reference]);
 
    const handleSubmit = (event) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
-
       const address = data.get("address");
       const city = data.get("city");
       const postalCode = data.get("postalCode");
       const country = data.get("country");
-
       dispatch(
          placeOrder({
             address,
@@ -85,21 +87,26 @@ const Shipping = () => {
             country,
          })
       );
+      if (!error && !pending) {
+         dispatch(
+            openSnackBar({
+               severity: "success",
+               text: "Order submitted",
+            })
+         );
+         dispatch(clearCart());
+         navigate("/products");
+      } else if (error && !pending) {
+         dispatch(
+            openSnackBar({
+               severity: "error",
+               text: "Something went wrong",
+            })
+         );
+         navigate("/cart");
+      }
    };
-   // useEffect(() => {
-   //    if (isMounted.current) {
-   //       if (error) {
-   //          dispatch(
-   //             openSnackBar({
-   //                severity: "error",
-   //                text: errorMessage,
-   //             })
-   //          );
-   //       }
-   //    } else {
-   //       isMounted.current = true;
-   //    }
-   // }, [errorMessage, error, dispatch]);
+
    return (
       <>
          <Grid
