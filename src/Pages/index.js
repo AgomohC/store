@@ -7,6 +7,7 @@ import Products from "./Products/Products";
 import SignUp from "./SignUp/SignUp";
 import SingleProductPage from "./SingleProductPage/SingleProductPage";
 import Shipping from "./Shipping/Shipping";
+import Error from "./Error/Error";
 
 export {
    Account,
@@ -18,4 +19,5 @@ export {
    SignUp,
    SingleProductPage,
    Shipping,
+   Error,
 };
