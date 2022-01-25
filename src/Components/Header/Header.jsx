@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Menu from "../Menu/Menu";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import MenuIcon from "@material-ui/icons/Menu";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
    link: {
       color: "#fff",
       textDecoration: "none",
+      cursor: "pointer",
    },
    flex: {
       display: "flex",
@@ -153,16 +154,24 @@ const Header = () => {
                      <MenuIcon />
                   </IconButton>
                )}
+
                <Typography
-                  className={classNames(classes.logo, classes.letterSpace)}
+                  className={classNames(
+                     classes.logo,
+                     classes.letterSpace,
+                     classes.link
+                  )}
                   variant="h4"
                   component="h1"
                   translate="no"
+                  onClick={() => {
+                     dispatch(closeMenu());
+                     navigate("/");
+                  }}
                >
-                  <Link to="/" className={classes.link}>
-                     Peculiar
-                  </Link>
+                  Peculiar
                </Typography>
+
                <Grid
                   container
                   spacing={10}
@@ -199,7 +208,10 @@ const Header = () => {
                   >
                      <Button
                         color="inherit"
-                        onClick={() => navigate("/cart")}
+                        onClick={() => {
+                           navigate("/cart");
+                           dispatch(closeMenu());
+                        }}
                         className={classes.marginRightFour}
                      >
                         <Badge badgeContent={cartLength} color="secondary">

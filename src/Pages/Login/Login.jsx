@@ -100,7 +100,7 @@ const Login = () => {
 
    return (
       <>
-         {user && <Navigate to="/account" />};
+         {user && <Navigate to="/account" />}
          <Grid
             className={classNames(
                classes.container,

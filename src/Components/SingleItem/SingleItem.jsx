@@ -30,7 +30,7 @@ const SingleItem = ({ item }) => {
    const { _id, title, image, price } = item;
    const navigate = useNavigate();
    return (
-      <Grid item xs={12} sm={6} lg={3}>
+      <Grid item xs={10} sm={6} lg={3}>
          <Card className={classes.root}>
             <CardActionArea onClick={() => navigate(`/products/${_id}`)}>
                <CardMedia
