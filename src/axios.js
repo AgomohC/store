@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.baseURL = "https://peculiar-store-api.herokuapp.com/api";
+axios.defaults.baseURL = "https://femto-store-backend.up.railway.app/api";
 // axios.defaults.baseURL = "http://localhost:8080/api";
 axios.interceptors.request.use(function (req) {
    const user = localStorage.getItem("user");
